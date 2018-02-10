@@ -26,12 +26,34 @@ User:
   2FA seed
 */
 
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+	"sess" json NOT NULL,
+	"expire" timestamp(6) NOT NULL
+)
+WITH (
+  OIDS = FALSE
+);
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
 CREATE TABLE "user" (
   id serial NOT NULL,
   email TEXT,
   "limit" integer NOT NULL DEFAULT(5),
   password_hash text NOT NULL,
   "2fa_seed" text,
+  facebook_id TEXT,
+  facebook_token TEXT,
+  facebook_name TEXT,
+  facebook_email TEXT,
+  twitter_id TEXT,
+  twitter_token TEXT,
+  twitter_displayName TEXT,
+  twitter_username TEXT,
+  google_id TEXT,
+  google_token TEXT,
+  google_email TEXT,
+  google_name TEXT,
   CONSTRAINT user_pkey PRIMARY KEY (id)
 )
 WITH (
