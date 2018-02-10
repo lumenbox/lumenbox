@@ -1,0 +1,17 @@
+{
+  "name": "lumenbox-server",
+  "version": "0.1.0",
+  "description": "LumenBox Server",
+  "private": true,
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/lumenbox/lumenbox.git"
+  },
+  "author": "Garth Williams",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/lumenbox/lumenbox#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
