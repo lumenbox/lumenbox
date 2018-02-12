@@ -12,9 +12,9 @@ export default {
   sessionKey: '7a98281f6b1641fd921310f030e5817f',
   sessionTimeout: 30 * 24 * 60 * 60 * 1000, // 30 days
   db: {
-    database: 'lumenbox',
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME || 'lumenbox',
+    user: process.env.DB_USER || '',
+    password: process.env.DB_PASSWORD || '',
     port: 5432,
     ssl: true,
     max: 20, // set pool max size to 20
