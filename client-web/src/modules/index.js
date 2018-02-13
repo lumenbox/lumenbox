@@ -1,5 +1,9 @@
+import App from './App'
 import Auth from './auth'
+import routes from './routes'
 
 export default options => ({
-  auth: Auth(options)
+  app: App(options),
+  auth: Auth(options),
+  routes
 })
