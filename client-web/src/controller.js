@@ -1,6 +1,6 @@
 import { Controller, Module } from 'cerebral'
-import Devtools from 'cerebral/devtools'
-import modules from './modules'
+import Devtools from 'cerebral/devtools' // eslint-disable-line import/no-named-as-default
+import Modules from './modules'
 import FormsProvider from '@cerebral/forms'
 import HttpProvider from '@cerebral/http'
 import config from './config'
@@ -8,7 +8,7 @@ import config from './config'
 export default Controller(
   Module({
     state: {},
-    modules,
+    modules: Modules({}),
     providers: {
       forms: FormsProvider({
         rules: {},
