@@ -1,7 +1,7 @@
 import { httpPost } from '@cerebral/http/operators'
 import { unset } from 'cerebral/operators'
 import { state } from 'cerebral/tags'
-import deleteCookie from 'actions/deleteCookie'
+import deleteCookie from '../../../actions/deleteCookie'
 
 export default [
   httpPost('/api/auth/logout', undefined),

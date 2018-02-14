@@ -1,17 +1,15 @@
-// import setToken from '../actions/setToken';
+import setToken from '../actions/setToken'
 import setUser from '../actions/setUser'
-// import autoRefreshToken from '../actions/autoRefreshToken';
-// import loadApp from '../actions/loadApp';
+import autoRefreshToken from '../actions/autoRefreshToken'
 import { reload } from '@cerebral/router/operators'
 import { state } from 'cerebral/tags'
-import setCookie from 'actions/setCookie'
+import setCookie from '../../../actions/setCookie'
 
 export default [
-  // setToken,
+  setToken,
   setUser,
   setCookie('auth_token', state`auth.token`),
   setCookie('auth_user', state`auth.user`),
-  // autoRefreshToken,
-  // loadApp,
+  autoRefreshToken,
   reload
 ]

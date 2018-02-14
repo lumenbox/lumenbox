@@ -2,8 +2,8 @@ import { httpPost } from '@cerebral/http/operators'
 import { set } from 'cerebral/operators'
 import { resolveObject, props, state } from 'cerebral/tags'
 import { isValidForm, resetForm } from '@cerebral/forms/operators'
-import notify, { NotificationType } from 'actions/notify'
-import parseError from 'actions/parseError'
+import notify from '../../../actions/notify'
+import parseError from '../../../actions/parseError'
 import { goTo } from '@cerebral/router/operators'
 
 export default [
@@ -20,11 +20,11 @@ export default [
       ),
       {
         success: [
-          notify(NotificationType.INFO, 'Password reset request sent'),
+          notify('INFO', 'Password reset request sent'),
           resetForm(state`auth.passwordResetRequestForm`),
           goTo('/')
         ],
-        error: [parseError('Unexpected Error'), notify(NotificationType.ERROR, props`errorMessage`)]
+        error: [parseError('Unexpected Error'), notify('ERROR', props`errorMessage`)]
       },
       set(state`auth.isLoading`, false)
     ],

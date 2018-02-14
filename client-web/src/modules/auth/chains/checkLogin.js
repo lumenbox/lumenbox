@@ -1,8 +1,8 @@
 import { unset, when } from 'cerebral/operators'
 import { state } from 'cerebral/tags'
 import refreshToken from './refreshToken'
-import getCookie from 'actions/getCookie'
-import deleteCookie from 'actions/deleteCookie'
+import getCookie from '../../../actions/getCookie'
+import deleteCookie from '../../../actions/deleteCookie'
 
 export default [
   getCookie(state`auth.token`, 'auth_token'),

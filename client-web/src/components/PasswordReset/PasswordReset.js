@@ -5,43 +5,39 @@ import { state, signal } from 'cerebral/tags'
 import * as classNames from 'classnames'
 import Input from '../Input'
 
-const Login = ({ isLoading, loginForm, fieldChanged, loginFormSubmitted }) => (
+const PasswordReset = ({ isLoading, passwordResetForm, fieldChanged, passwordResetFormSubmitted }) => (
   <section className="section">
     <form
       className="container"
       onSubmit={
         /* istanbul ignore next */ e => {
           e.preventDefault()
-          loginFormSubmitted()
+          passwordResetFormSubmitted()
         }
       }>
-      <h1 className="title">Login</h1>
+      <h1 className="title">Reset Password</h1>
+      <Input label="Email" type="email" icon="envelope" {...form.email} />
       <Input
-        label="Email"
-        type="email"
-        icon="envelope"
-        {...loginForm.email}
-        onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'loginForm.email', value })}
-      />
-      <Input
-        label="Password"
+        label="New Password"
         type="password"
         icon="key"
-        {...loginForm.password}
-        onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'loginForm.password', value })}
+        {...passwordResetForm.password}
+        onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordResetForm.password', value })}
+      />
+      <Input
+        label="Repeat Password"
+        type="password"
+        icon="key"
+        {...passwordResetForm.repeatPassword}
+        onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordResetForm.repeatPassword', value })}
       />
       <div className="field is-grouped is-grouped-right">
-        <div className="control">
-          <a className="button is-text" href="/password-reset-request">
-            Forgot Password
-          </a>
-        </div>
         <div className="control">
           <button
             type="submit"
             className={classNames('button', 'submit-button', 'is-success', { 'is-loading': isLoading })}
-            disabled={!loginForm.isValid}>
-            Login
+            disabled={!passwordResetForm.isValid}>
+            Reset
           </button>
         </div>
       </div>
@@ -52,9 +48,9 @@ const Login = ({ isLoading, loginForm, fieldChanged, loginFormSubmitted }) => (
 export default connect(
   {
     isLoading: state`auth.isLoading`,
-    loginForm: form(state`auth.loginForm`),
+    passwordResetForm: form(state`auth.passwordResetForm`),
     fieldChanged: signal`auth.fieldChanged`,
-    loginFormSubmitted: signal`auth.loginFormSubmitted`
+    passwordResetFormSubmitted: signal`auth.passwordResetFormSubmitted`
   },
-  Login
+  PasswordReset
 )
