@@ -38,10 +38,12 @@ ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFE
 
 CREATE TABLE "user" (
   id serial NOT NULL,
-  email text,
-  "limit" integer NOT NULL DEFAULT(5),
-  password_hash text NOT NULL,
+  first_name text NOT NULL,
+  last_name text NOT NULL,
+  email text NOT NULL,
+  password_hash text,
   "2fa_seed" text,
+  "limit" integer NOT NULL DEFAULT(5),
   facebook_id text,
   facebook_token text,
   facebook_name text,

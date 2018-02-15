@@ -1,31 +1,11 @@
-import { httpPost } from '@cerebral/http/operators'
-import { set } from 'cerebral/operators'
-import { resolveObject, props, state } from 'cerebral/tags'
-import { isValidForm, resetForm } from '@cerebral/forms/operators'
-import notify from '../../../actions/notify'
-import parseError from '../../../actions/parseError'
+import { state } from 'cerebral/tags'
+import formSubmitted from '../../../signals/formSubmitted'
 import { goTo } from '@cerebral/router/operators'
 
-export default [
-  isValidForm(state`auth.passwordResetForm`),
-  {
-    true: [
-      set(state`auth.isLoading`, true),
-      httpPost(
-        '/api/customer/reset-password',
-        resolveObject({
-          email: state`auth.passwordResetForm.email.value`,
-          password: state`auth.passwordResetForm.password.value`,
-          repeatPassword: state`auth.passwordResetForm.repeatPassword.value`,
-          passwordResetCode: state`auth.passwordResetCode`
-        })
-      ),
-      {
-        success: [notify('INFO', 'Password has been reset'), resetForm(state`auth.passwordResetForm`), goTo('/login')],
-        error: [parseError('Unexpected Error'), notify('ERROR', props`errorMessage`)]
-      },
-      set(state`auth.isLoading`, false)
-    ],
-    false: []
-  }
-]
+export default formSubmitted({
+  post: '/api/reset-password',
+  form: state`auth.passwordResetForm`,
+  isLoading: state`auth.isLoading`,
+  successMessage: 'Password has been reset',
+  successChain: [goTo('/login')]
+})

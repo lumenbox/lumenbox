@@ -4,9 +4,8 @@ import loginSuccess from '../chains/loginSuccess'
 import { goTo } from '@cerebral/router/operators'
 
 export default formSubmitted({
-  post: '/api/login',
-  form: state`auth.loginForm`,
+  post: '/api/user',
+  form: state`auth.registerForm`,
   isLoading: state`auth.isLoading`,
-  successChain: [...loginSuccess, goTo('/')],
-  unauthorisedMessage: 'Login failed'
+  successChain: [loginSuccess, goTo('/register-complete')]
 })

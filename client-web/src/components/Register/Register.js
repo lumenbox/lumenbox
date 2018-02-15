@@ -6,61 +6,51 @@ import Input from '../Input'
 import Checkbox from '../Checkbox'
 import * as classNames from 'classnames'
 
-const Register = ({ isLoading, registerForm, fieldChanged }) => (
+const Register = ({ isLoading, registerForm, fieldChanged, registerFormSubmitted }) => (
   <section className="section">
-    <form className="container">
+    <form
+      className="container"
+      onSubmit={
+        /* istanbul ignore next */ e => {
+          e.preventDefault()
+          registerFormSubmitted()
+        }
+      }>
       <h1 className="title">Register</h1>
-      <div className="columns">
-        <div className="column">
-          <Input
-            label="Email"
-            type="email"
-            id="email"
-            autoComplete="email"
-            {...registerForm.email}
-            onChange={value => fieldChanged({ name: 'registerForm.email', value })}
-          />
-        </div>
-      </div>
-      <div className="columns">
-        <div className="column">
-          <Input
-            label="Password"
-            type="password"
-            id="password"
-            {...registerForm.password}
-            onChange={value => fieldChanged({ name: 'registerForm.password', value })}
-          />
-        </div>
-        <div className="column">
-          <Input
-            label="Repeat Password"
-            type="password"
-            id="repeatPassword"
-            {...registerForm.repeatPassword}
-            onChange={value => fieldChanged({ name: 'registerForm.repeatPassword', value })}
-          />
-        </div>
-      </div>
-      <hr />
-      <div className="columns">
-        <div className="column">
-          <Input
-            label="First Name"
-            type="text"
-            {...registerForm.firstname}
-            onChange={value => fieldChanged({ name: 'registerForm.firstname', value })}
-          />
-        </div>
-        <div className="column">
-          <Input
-            label="Last Name"
-            type="text"
-            {...registerForm.lastName}
-            onChange={value => fieldChanged({ name: 'registerForm.lastName', value })}
-          />
-        </div>
-      </div>
+      <Input
+        label="First Name"
+        type="text"
+        {...registerForm.firstname}
+        onChange={value => fieldChanged({ name: 'registerForm.firstname', value })}
+      />
+      <Input
+        label="Last Name"
+        type="text"
+        {...registerForm.lastName}
+        onChange={value => fieldChanged({ name: 'registerForm.lastName', value })}
+      />
+      <Input
+        label="Email"
+        type="email"
+        id="email"
+        autoComplete="email"
+        {...registerForm.email}
+        onChange={value => fieldChanged({ name: 'registerForm.email', value })}
+      />
+      <Input
+        label="Password"
+        type="password"
+        id="password"
+        {...registerForm.password}
+        onChange={value => fieldChanged({ name: 'registerForm.password', value })}
+      />
+      <Input
+        label="Repeat Password"
+        type="password"
+        id="repeatPassword"
+        {...registerForm.repeatPassword}
+        onChange={value => fieldChanged({ name: 'registerForm.repeatPassword', value })}
+      />
       <Checkbox
         name="privacy"
         label="I accept the privacy policy"
@@ -73,14 +63,13 @@ const Register = ({ isLoading, registerForm, fieldChanged }) => (
         {...registerForm.acceptTerms}
         onChange={value => fieldChanged({ name: 'registerForm.acceptTerms', value: value })}
       />
-      <hr />
       <div className="field is-grouped is-grouped-right">
         <div className="control">
           <button
             type="submit"
             className={classNames('button', 'submit-button', 'is-success', { 'is-loading': isLoading })}
             disabled={!registerForm.isValid}>
-            Login
+            Register
           </button>
         </div>
       </div>
@@ -92,7 +81,8 @@ export default connect(
   {
     isLoading: state`auth.isLoading`,
     registerForm: form(state`auth.registerForm`),
-    fieldChanged: signal`auth.fieldChanged`
+    fieldChanged: signal`auth.fieldChanged`,
+    registerFormSubmitted: signal`auth.registerFormSubmitted`
   },
   Register
 )

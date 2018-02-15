@@ -12,6 +12,7 @@ import changePasswordForm from './forms/changePassword'
 import passwordResetRequestForm from './forms/passwordResetRequest'
 import passwordResetForm from './forms/passwordReset'
 import registerForm from './forms/register'
+import registerFormSubmitted from './signals/registerFormSubmitted'
 import changePasswordSubmitted from './signals/changePasswordSubmitted'
 
 export default options =>
@@ -34,6 +35,7 @@ export default options =>
       passwordResetRouted,
       fieldChanged: FieldChanged('auth'),
       loginFormSubmitted,
+      registerFormSubmitted,
       changePasswordSubmitted,
       passwordResetRequestFormSubmitted,
       passwordResetFormSubmitted,
