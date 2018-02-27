@@ -8,7 +8,7 @@ module.exports = {
   isProduction: env === 'production',
   isTest: env === 'test',
   isDevelopment: env === 'development',
-  staticPath: '',
+  staticPath: '../../client-web/public',
   sessionKey: '7a98281f6b1641fd921310f030e5817f',
   sessionTimeout: 30 * 24 * 60 * 60 * 1000, // 30 days
   db: {
@@ -16,7 +16,7 @@ module.exports = {
     user: process.env.DB_USER || '',
     password: process.env.DB_PASSWORD || '',
     port: 5432,
-    ssl: true,
+    ssl: false,
     max: 20, // set pool max size to 20
     min: 4, // set min pool size to 4
     idleTimeoutMillis: 1000, // close idle clients after 1 second
