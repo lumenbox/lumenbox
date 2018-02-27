@@ -22,7 +22,8 @@ export default ({
   {
     true: [
       ...(isLoading ? [set(isLoading, true)] : []),
-      post ? httpPost(post, formToJson(form)) : httpPut(put, formToJson(form)),
+      formToJson(props`formData`, form),
+      post ? httpPost(post, props`formData`) : httpPut(put, props`formData`),
       {
         '401': [notify('ERROR', unathorisedMessage), ...unathorisedChain],
         success: [...(successMessage ? [notify('SUCCESS', successMessage)] : []), resetForm(form), ...successChain],
