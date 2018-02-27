@@ -3,7 +3,7 @@ const path = require('path')
 const env = process.env.NODE_ENV || 'development'
 
 export default {
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3001,
   env,
   isProduction: env === 'production',
   isTest: env === 'test',
