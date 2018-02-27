@@ -23,9 +23,10 @@ module.exports = (passport, pool) => {
         if (user) {
           return done(null, false)
         }
+        const { firstName, lastName } = req.body
         pool.query(
-          'insert into "user" (email, password_hash) values ($1, $2) returning *',
-          [email, generateHash(password)],
+          'insert into "user" (first_name, last_name, email, password_hash) values ($1, $2, $3, $4) returning *',
+          [firstName, lastName, email, generateHash(password)],
           (err, res) => (err ? done(err) : done(null, res.rows[0]))
         )
       })

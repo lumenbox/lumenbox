@@ -32,7 +32,7 @@ module.exports = config => {
 
   // setup cookie and body parsing
   app.use(cookieParser())
-  app.use(bodyParser())
+  app.use(bodyParser.json())
 
   // connect to the db
   const pool = new Pool(config.db)
