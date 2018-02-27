@@ -20,8 +20,8 @@ const Register = ({ isLoading, registerForm, fieldChanged, registerFormSubmitted
       <Input
         label="First Name"
         type="text"
-        {...registerForm.firstname}
-        onChange={value => fieldChanged({ name: 'registerForm.firstname', value })}
+        {...registerForm.firstName}
+        onChange={value => fieldChanged({ name: 'registerForm.firstName', value })}
       />
       <Input
         label="Last Name"

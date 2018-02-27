@@ -13,7 +13,7 @@ export default {
     isRequired: true,
     validationRules: ['equalsField:auth.registerForm.password']
   },
-  firstname: {
+  firstName: {
     value: '',
     isRequired: true
   },
