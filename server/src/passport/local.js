@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const LocalStrategy = require('passport-local').Strategy
 
 const generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
-const verifyHash = (password, password_hash) => bcrypt.compareSync(password, password_hash)
+const verifyHash = (password, passwordHash) => bcrypt.compareSync(password, passwordHash)
 
 const localConfig = {
   usernameField: 'email',

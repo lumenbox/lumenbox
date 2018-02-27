@@ -13,7 +13,16 @@
   "homepage": "https://bitbucket.org/lumenbox/lumenbox#readme",
   "scripts": {
     "start": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix": "prettier --write \"src/**/*.js\""
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "jsxBracketSameLine": true
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
@@ -34,6 +43,17 @@
     "pg": "^7.4.1"
   },
   "devDependencies": {
-    "nodemon": "^1.17.1"
+    "eslint": "^4.18.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-require-path-exists": "^1.1.7",
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.17.1",
+    "prettier": "^1.11.0"
   }
 }

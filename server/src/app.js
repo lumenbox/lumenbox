@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const passport = require('passport')
-const pgSession = require('connect-pg-simple')(session)
+const PgSession = require('connect-pg-simple')(session)
 const authorise = require('./passport/authorise')
 const passportSetup = require('./passport')
 
@@ -44,7 +44,7 @@ module.exports = config => {
       saveUninitialized: false,
       secret: config.sessionKey,
       cookie: { maxAge: config.sessionTimeout },
-      store: new pgSession({ pool })
+      store: new PgSession({ pool })
     })
   )
 

@@ -20,7 +20,7 @@
     "build": "npm-run-all --serial build:*",
     "lint": "eslint src",
     "test": "react-scripts test --env=jsdom",
-    "fix": "prettier --write \"src/**/*.js\" \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.scss\""
+    "fix": "prettier --write \"src/**/*.js\" \"src/**/*.scss\""
   },
   "proxy": "http://localhost:3001",
   "prettier": {

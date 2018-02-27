@@ -1,0 +1,18 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "standard",
+    "plugin:jest/recommended",
+    "plugin:require-path-exists/recommended",
+    "prettier",
+    "prettier/standard"
+  ],
+  "plugins": [
+    "jest",
+    "require-path-exists",
+    "prettier",
+    "standard"
+  ]
+}
