@@ -13,8 +13,8 @@ export default ({
   isLoading,
   successMessage,
   successChain = [],
-  unathorisedMessage = 'Not authroised',
-  unathorisedChain = [],
+  unauthorisedMessage = 'Not authroised',
+  unauthorisedChain = [],
   errorMessage = 'Unexpected Error',
   errorChain = []
 }) => [
@@ -25,7 +25,7 @@ export default ({
       formToJson(props`formData`, form),
       post ? httpPost(post, props`formData`) : httpPut(put, props`formData`),
       {
-        '401': [parseError(unathorisedMessage), notify('ERROR', props`errorMessage`), ...unathorisedChain],
+        '401': [parseError(unauthorisedMessage), notify('ERROR', props`errorMessage`), ...unauthorisedChain],
         success: [...(successMessage ? [notify('SUCCESS', successMessage)] : []), resetForm(form), ...successChain],
         error: [parseError(errorMessage), notify('ERROR', props`errorMessage`), ...errorChain]
       },
