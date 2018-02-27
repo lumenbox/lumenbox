@@ -67,6 +67,7 @@ CREATE TABLE domain (
   domain text NOT NULL,
   "limit" integer NOT NULL DEFAULT(5),
   user_id integer NOT NULL,
+  system boolean NOT NULL DEFAULT(0),
   CONSTRAINT domain_pkey PRIMARY KEY (id),
   CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES "user" (id) MATCH SIMPLE
 )
@@ -83,8 +84,10 @@ CREATE TABLE account (
   memo_type text NOT NULL default '',
   signature text NOT NULL default '',
   rev_signature text NOT NULL default '',
+  user_id integer NOT NULL,
   CONSTRAINT account_pkey PRIMARY KEY (id),
-  CONSTRAINT domain_fkey FOREIGN KEY (domain_id) REFERENCES domain (id) MATCH SIMPLE
+  CONSTRAINT domain_fkey FOREIGN KEY (domain_id) REFERENCES domain (id) MATCH SIMPLE,
+  CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES "user" (id) MATCH SIMPLE
 )
 WITH (
   OIDS = FALSE

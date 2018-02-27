@@ -3,7 +3,7 @@ const changeCase = require('change-case-object')
 
 const sendUser = (req, res) =>
   res.status(200).send({
-    user: changeCase.camelCase(pick(req.user, ['first_name', 'last_name', 'email']))
+    user: changeCase.camelCase(pick(req.user, ['first_name', 'last_name', 'email', 'limit']))
   })
 
 module.exports = ({ app, pool, config, authorise, passport }) => {
