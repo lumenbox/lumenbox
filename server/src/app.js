@@ -12,7 +12,7 @@ const pgSession = require('connect-pg-simple')(session)
 const authorise = require('./passport/authorise')
 const passportSetup = require('./passport')
 
-export default config => {
+module.exports = config => {
   // create the app
   const app = express()
   if (!config.isTest) {
@@ -60,7 +60,7 @@ export default config => {
       if (fs.statSync(path.join(__dirname, filePath)).isDirectory()) {
         load(filePath, args)
       } else if (file.endsWith('.js') && !file.endsWith('.test.js')) {
-        const { default: setupRoute } = require('./' + filePath)
+        const setupRoute = require('./' + filePath)
         setupRoute(args)
       }
     })

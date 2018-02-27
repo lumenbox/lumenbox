@@ -1,6 +1,6 @@
 const pick = require('lodash/pick')
 
-export default ({ app, pool, config, authorise }) => {
+module.exports = ({ app, pool, config, authorise, passport }) => {
   app
     .route('/api/session')
     .get(authorise, (req, res) => res.status(200).send({ user: pick(req.user, ['id', 'email']) }))

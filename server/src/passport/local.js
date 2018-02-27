@@ -10,7 +10,7 @@ const localConfig = {
   passReqToCallback: true // allows us to pass back the entire request to the callback
 }
 
-module.exports = (passport, pool, generateHash, verifyHash) => {
+module.exports = (passport, pool) => {
   passport.use(
     'local-signup',
     new LocalStrategy(localConfig, (req, email, password, done) =>
