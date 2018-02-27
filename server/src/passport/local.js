@@ -21,7 +21,7 @@ module.exports = (passport, pool) => {
         const user = res.rows[0]
         // check to see if theres already a user with that email
         if (user) {
-          return done(null, false)
+          return done(null, false, { message: 'Email address already registered' })
         }
         const { firstName, lastName } = req.body
         pool.query(

@@ -25,7 +25,7 @@ export default ({
       formToJson(props`formData`, form),
       post ? httpPost(post, props`formData`) : httpPut(put, props`formData`),
       {
-        '401': [notify('ERROR', unathorisedMessage), ...unathorisedChain],
+        '401': [parseError(unathorisedMessage), notify('ERROR', props`errorMessage`), ...unathorisedChain],
         success: [...(successMessage ? [notify('SUCCESS', successMessage)] : []), resetForm(form), ...successChain],
         error: [parseError(errorMessage), notify('ERROR', props`errorMessage`), ...errorChain]
       },
