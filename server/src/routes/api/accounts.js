@@ -13,13 +13,13 @@ const values = (object, ...keys) => keys.map(key => object[key])
 
 module.exports = ({ app, pool, config, authorise }) => {
   const verifyDomain = (req, res, next) =>
-    pool.query('select * from "domain" where id = $1', [req.body.domainId], (err, res) => {
+    pool.query('select * from "domain" where id = $1', [req.body.domainId], (err, result) => {
       if (err) {
         console.error('failed to lookup domain', err)
         return res.status(500).send({ error: 'Unxpected Error' })
       }
-      const domain = changeCase.camelCase(res.rows[0])
-      if (!res.rows[0] || (!domain.system && domain.userId !== req.user.id)) {
+      const domain = changeCase.camelCase(result.rows[0])
+      if (!result.rows[0] || (!domain.system && domain.userId !== req.user.id)) {
         console.warn('attemping to lookup unauthorised domain')
         return res.sendStatus(401)
       }
@@ -28,12 +28,12 @@ module.exports = ({ app, pool, config, authorise }) => {
     })
 
   app.get('/api/accounts', authorise, (req, res) => {
-    pool.query('select * from "account" where user_id = $1', [req.user.id], (err, res) => {
+    pool.query('select * from "account" where user_id = $1', [req.user.id], (err, result) => {
       if (err) {
         console.error('failed to get accounts', err)
         return res.status(500).send({ error: 'Unxpected Error' })
       }
-      const accounts = res.rows.map(prepareAccount)
+      const accounts = result.rows.map(prepareAccount)
       res.send({ accounts })
     })
   })
@@ -41,35 +41,48 @@ module.exports = ({ app, pool, config, authorise }) => {
   app
     .route('/api/account/:id')
     .get(authorise, (req, res) => {
-      pool.query('select * from "account" where user_id = $1 && id = $2', [req.user.id, req.params.id], (err, res) => {
-        if (err) {
-          console.error('failed to get account', err)
-          return res.status(500).send({ error: 'Unxpected Error' })
+      pool.query(
+        'select * from "account" where user_id = $1 && id = $2',
+        [req.user.id, req.params.id],
+        (err, result) => {
+          if (err) {
+            console.error('failed to get account', err)
+            return res.status(500).send({ error: 'Unxpected Error' })
+          }
+          sendAccount(res, result.rows[0])
         }
-        sendAccount(res, res.rows[0])
-      })
+      )
     })
     .post(authorise, verifyDomain, (req, res) => {
-      const query = req.domain.system
-        ? [
-            'insert into "account" (account, name, domain_id, memo, memo_type, user_id) ' +
-              'values ($1, $2, $3, $4, $5, $6) returning *',
-            [...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType'), req.user.id]
-          ]
-        : [
-            'insert into "account" (account, name, domain_id, memo, memo_type, signature, rev_signature, user_id) ' +
-              'values ($1, $2, $3, $4, $5, $6) returning *',
-            [
-              ...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType', 'signature', 'revSignature'),
-              req.user.id
-            ]
-          ]
-      pool.query(...query, (err, res) => {
+      pool.query('select count(*) as count from "account" where user_id = $1', [req.user.id], (err, result) => {
         if (err) {
           console.error('failed to add account', err)
           return res.status(500).send({ error: 'Unxpected Error' })
         }
-        sendAccount(res, res.rows[0])
+        if (result.rows[0].count >= req.domain.limit) {
+          return res.status(400).send({ error: 'limit exceeded' })
+        }
+        const query = req.domain.system
+          ? [
+              'insert into "account" (account, name, domain_id, memo, memo_type, user_id) ' +
+                'values ($1, $2, $3, $4, $5, $6) returning *',
+              [...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType'), req.user.id]
+            ]
+          : [
+              'insert into "account" (account, name, domain_id, memo, memo_type, signature, rev_signature, user_id) ' +
+                'values ($1, $2, $3, $4, $5, $6) returning *',
+              [
+                ...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType', 'signature', 'revSignature'),
+                req.user.id
+              ]
+            ]
+        pool.query(...query, (err, result) => {
+          if (err) {
+            console.error('failed to add account', err)
+            return res.status(500).send({ error: 'Unxpected Error' })
+          }
+          sendAccount(res, result.rows[0])
+        })
       })
     })
     .put(authorise, verifyDomain, (req, res) => {
@@ -85,7 +98,7 @@ module.exports = ({ app, pool, config, authorise }) => {
           'memo_type = $6, signature = $7, rev_signature = $8) ' +
           'where user_id = $9 && id = $1',
         params,
-        (err, res) => {
+        (err, result) => {
           if (err) {
             console.error('failed to update account', err)
             return res.status(500).send({ error: 'Unxpected Error' })
@@ -95,7 +108,7 @@ module.exports = ({ app, pool, config, authorise }) => {
       )
     })
     .delete(authorise, (req, res) => {
-      pool.query('delete from "account" where user_id = $1 && id = $2', [req.user.id, req.params.id], (err, res) => {
+      pool.query('delete from "account" where user_id = $1 && id = $2', [req.user.id, req.params.id], (err, result) => {
         if (err) {
           console.error('failed to delete account', err)
           return res.status(500).send({ error: 'Unxpected Error' })
