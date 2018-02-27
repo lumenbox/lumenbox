@@ -54,40 +54,44 @@ module.exports = ({ app, pool, config, authorise }) => {
       )
     })
     .post(authorise, verifyDomain, (req, res) => {
-      pool.query('select count(*) as count from "account" where user_id = $1', [req.user.id], (err, result) => {
-        if (err) {
-          console.error('failed to add account', err)
-          return res.status(500).send({ error: 'Unxpected Error' })
-        }
-        if (result.rows[0].count >= req.domain.limit) {
-          return res.status(400).send({ error: 'limit exceeded' })
-        }
-        const query = req.domain.system
-          ? [
-              'insert into "account" (account, name, domain_id, memo, memo_type, user_id) ' +
-                'values ($1, $2, $3, $4, $5, $6) returning *',
-              [...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType'), req.user.id]
-            ]
+      const execPost = () => {
+        const params = req.domain.system
+          ? [...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType'), '', '', req.user.id]
           : [
-              'insert into "account" (account, name, domain_id, memo, memo_type, signature, rev_signature, user_id) ' +
-                'values ($1, $2, $3, $4, $5, $6) returning *',
-              [
-                ...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType', 'signature', 'revSignature'),
-                req.user.id
-              ]
+              ...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType', 'signature', 'revSignature'),
+              req.user.id
             ]
-        pool.query(...query, (err, result) => {
+        pool.query(
+          'insert into "account" (account, name, domain_id, memo, memo_type, signature, rev_signature, user_id) ' +
+            'values ($1, $2, $3, $4, $5, $6) returning *',
+          params,
+          (err, result) => {
+            if (err) {
+              console.error('failed to add account', err)
+              return res.status(500).send({ error: 'Unxpected Error' })
+            }
+            sendAccount(res, result.rows[0])
+          }
+        )
+      }
+      if (req.domain.limit > 0) {
+        pool.query('select count(*) as count from "account" where user_id = $1', [req.user.id], (err, result) => {
           if (err) {
             console.error('failed to add account', err)
             return res.status(500).send({ error: 'Unxpected Error' })
           }
-          sendAccount(res, result.rows[0])
+          if (result.rows[0].count >= req.domain.limit) {
+            return res.status(400).send({ error: 'limit exceeded' })
+          }
+          execPost()
         })
-      })
+      } else {
+        execPost()
+      }
     })
     .put(authorise, verifyDomain, (req, res) => {
       const params = req.domain.system
-        ? [...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType', '', ''), req.user.id]
+        ? [...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType'), '', '', req.user.id]
         : [
             ...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType', 'signature', 'revSignature'),
             req.user.id

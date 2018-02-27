@@ -35,14 +35,7 @@ module.exports = ({ app, pool, config, authorise }) => {
       )
     })
     .post(authorise, (req, res) => {
-      pool.query('select count(*) as count from "domain" where user_id = $1', [req.user.id], (err, result) => {
-        if (err) {
-          console.error('failed to add domain', err)
-          return res.status(500).send({ error: 'Unxpected Error' })
-        }
-        if (result.rows[0].count >= req.user.limit) {
-          return res.status(400).send({ error: 'limit exceeded' })
-        }
+      const execPost = () =>
         pool.query(
           'insert into "domain" (domain, user_id) values ($1, $2) returning *',
           [req.body.domain, req.user.id],
@@ -54,7 +47,20 @@ module.exports = ({ app, pool, config, authorise }) => {
             sendDomain(res, result.rows[0])
           }
         )
-      })
+      if (req.user.limit > 0) {
+        pool.query('select count(*) as count from "domain" where user_id = $1', [req.user.id], (err, result) => {
+          if (err) {
+            console.error('failed to add domain', err)
+            return res.status(500).send({ error: 'Unxpected Error' })
+          }
+          if (result.rows[0].count >= req.user.limit) {
+            return res.status(400).send({ error: 'limit exceeded' })
+          }
+          execPost()
+        })
+      } else {
+        execPost()
+      }
     })
     .put(authorise, (req, res) => {
       pool.query(
