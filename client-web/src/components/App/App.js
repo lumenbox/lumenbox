@@ -13,6 +13,7 @@ import dashboard from '../Dashboard'
 import register from '../Register'
 import registerComplete from '../RegisterComplete'
 import login from '../Login'
+import changePassword from '../ChangePassword'
 import passwordResetRequest from '../PasswordResetRequest'
 import passwordReset from '../PasswordReset'
 
@@ -21,6 +22,7 @@ let components = {
   register,
   registerComplete,
   login,
+  changePassword,
   passwordResetRequest,
   passwordReset
 }

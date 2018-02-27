@@ -1,4 +1,4 @@
-const local = require('./local')
+const setupLocal = require('./local').setup
 
 module.exports = (passport, pool) => {
   passport.serializeUser((user, done) => done(null, user.id))
@@ -9,5 +9,5 @@ module.exports = (passport, pool) => {
     })
   })
 
-  local(passport, pool)
+  setupLocal(passport, pool)
 }

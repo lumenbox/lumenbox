@@ -19,7 +19,7 @@ const Menu = ({ user, showMobileMenu, page, isLogoutLoading, logoutClicked }) =>
             key="myAccount"
             className={classNames('navbar-item', { 'is-active': page === 'changePassword' })}
             href="/change-password">
-            My Account
+            Change Password
           </a>,
           <a
             key="logout"

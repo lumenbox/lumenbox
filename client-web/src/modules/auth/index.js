@@ -30,6 +30,7 @@ export default options =>
       loginRouted: routed('login'),
       registerRouted: routed('register'),
       registerCompleteRouted: routed('registerComplete'),
+      changePasswordRouted: routed('changePassword'),
       passwordResetRequestRouted: routed('passwordResetRequest'),
       passwordResetRouted,
       fieldChanged: FieldChanged('auth'),

@@ -5,56 +5,60 @@ import { state, signal } from 'cerebral/tags'
 import * as classNames from 'classnames'
 import Input from '../Input'
 
-const ChangePassword = ({ isLoading, passwordForm, fieldChanged, changePasswordSubmitted }) => (
-  <form
-    onSubmit={
-      /* istanbul ignore next */ e => {
-        e.preventDefault()
-        changePasswordSubmitted()
-      }
-    }>
-    <h2 className="title">Change Password</h2>
-    <Input
-      label="Current Password"
-      type="password"
-      icon="key"
-      {...passwordForm.password}
-      onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordForm.password', value })}
-      autoComplete="off"
-    />
-    <Input
-      label="New Passwod"
-      type="password"
-      icon="key"
-      {...passwordForm.newPassword}
-      onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordForm.newPassword', value })}
-      autoComplete="off"
-    />
-    <Input
-      label="Repeat Password"
-      type="password"
-      icon="key"
-      {...passwordForm.repeatNewPassword}
-      onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordForm.repeatNewPassword', value })}
-      autoComplete="off"
-    />
-    <div className="field is-grouped is-grouped-right">
-      <p className="control">
-        <button
-          type="submit"
-          className={classNames('button', 'submit-button', 'is-success', { 'is-loading': isLoading })}
-          disabled={!passwordForm.isValid}>
-          Change Password
-        </button>
-      </p>
-    </div>
-  </form>
+const ChangePassword = ({ isLoading, changePasswordForm, fieldChanged, changePasswordSubmitted }) => (
+  <section className="section">
+    <form
+      onSubmit={
+        /* istanbul ignore next */ e => {
+          e.preventDefault()
+          changePasswordSubmitted()
+        }
+      }>
+      <h2 className="title">Change Password</h2>
+      <Input
+        label="Current Password"
+        type="password"
+        icon="key"
+        {...changePasswordForm.password}
+        onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'changePasswordForm.password', value })}
+        autoComplete="off"
+      />
+      <Input
+        label="New Passwod"
+        type="password"
+        icon="key"
+        {...changePasswordForm.newPassword}
+        onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'changePasswordForm.newPassword', value })}
+        autoComplete="off"
+      />
+      <Input
+        label="Repeat Password"
+        type="password"
+        icon="key"
+        {...changePasswordForm.repeatNewPassword}
+        onChange={
+          /* istanbul ignore next */ value => fieldChanged({ name: 'changePasswordForm.repeatNewPassword', value })
+        }
+        autoComplete="off"
+      />
+      <div className="field is-grouped is-grouped-right">
+        <p className="control">
+          <button
+            type="submit"
+            className={classNames('button', 'submit-button', 'is-success', { 'is-loading': isLoading })}
+            disabled={!changePasswordForm.isValid}>
+            Change Password
+          </button>
+        </p>
+      </div>
+    </form>
+  </section>
 )
 
 export default connect(
   {
     isLoading: state`auth.isLoading`,
-    passwordForm: form(state`auth.changePasswordForm`),
+    changePasswordForm: form(state`auth.changePasswordForm`),
     fieldChanged: signal`auth.fieldChanged`,
     changePasswordSubmitted: signal`auth.changePasswordSubmitted`
   },

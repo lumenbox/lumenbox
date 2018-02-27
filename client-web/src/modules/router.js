@@ -6,6 +6,7 @@ export default Router({
     { path: '/login', signal: 'auth.loginRouted' },
     { path: '/register', signal: 'auth.registerRouted' },
     { path: '/register-complete', signal: 'auth.registerCompleteRouted' },
+    { path: '/change-password', signal: 'auth.changePasswordRouted' },
     { path: '/password-reset-request', signal: 'auth.passwordResetRequestRouted' },
     { path: '/password-reset/:email/:passwordResetCode', signal: 'auth.passwordResetRouted' },
     { path: '/*', signal: 'app.notFoundRouted' }
