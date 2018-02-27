@@ -5,7 +5,6 @@ import loginFormSubmitted from './signals/loginFormSubmitted'
 import passwordResetRequestFormSubmitted from './signals/passwordResetRequestFormSubmitted'
 import passwordResetFormSubmitted from './signals/passwordResetFormSubmitted'
 import logoutClicked from './signals/logoutClicked'
-import tokenWillExpire from './signals/tokenWillExpire'
 import passwordResetRouted from './signals/passwordResetRouted'
 import loginForm from './forms/login'
 import changePasswordForm from './forms/changePassword'
@@ -39,7 +38,6 @@ export default options =>
       changePasswordSubmitted,
       passwordResetRequestFormSubmitted,
       passwordResetFormSubmitted,
-      logoutClicked,
-      tokenWillExpire
+      logoutClicked
     }
   })

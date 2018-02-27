@@ -18,6 +18,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "change-case-object": "^2.0.0",
     "compression": "^1.7.2",
     "connect-pg-simple": "^4.2.1",
     "cookie-parser": "^1.4.3",
@@ -33,6 +34,6 @@
     "pg": "^7.4.1"
   },
   "devDependencies": {
-    "nodemon": "^1.15.1"
+    "nodemon": "^1.17.1"
   }
 }

@@ -1,16 +1,12 @@
-import { httpPost } from '@cerebral/http/operators'
+import { httpDelete } from '@cerebral/http/operators'
 import { unset } from 'cerebral/operators'
 import { state } from 'cerebral/tags'
-import deleteCookie from '../../../actions/deleteCookie'
 
 export default [
-  httpPost('/api/auth/logout', undefined),
+  httpDelete('/api/session'),
   {
     success: [],
     error: []
   },
-  unset(state`auth.user`),
-  // unset(state`auth.token`),
-  deleteCookie('auth_user')
-  // deleteCookie('auth_token')
+  unset(state`auth.user`)
 ]

@@ -1,14 +1,12 @@
-import { unset, when } from 'cerebral/operators'
+import { httpGet } from '@cerebral/http/operators'
+import { unset } from 'cerebral/operators'
 import { state } from 'cerebral/tags'
-import refreshToken from './refreshToken'
-import getCookie from '../../../actions/getCookie'
-import deleteCookie from '../../../actions/deleteCookie'
+import setUser from '../actions/setUser'
 
 export default [
-  getCookie(state`auth.token`, 'auth_token'),
-  when(state`auth.token`),
+  httpGet('/api/session'),
   {
-    true: refreshToken,
-    false: [unset(state`auth.user`), deleteCookie('auth_user'), deleteCookie('auth_token')]
+    success: setUser,
+    error: unset(state`auth.user`)
   }
 ]

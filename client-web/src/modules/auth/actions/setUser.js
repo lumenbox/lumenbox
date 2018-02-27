@@ -1,3 +1,3 @@
-export default function setUser({ props: { response: { result: { data } } }, state }) {
-  state.set('auth.user', data)
+export default function setUser({ props: { response: { result: { user } } }, state }) {
+  state.set('auth.user', user)
 }

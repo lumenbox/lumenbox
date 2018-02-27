@@ -39,7 +39,6 @@
     "cerebral": "^4.1.1",
     "classnames": "^2.2.5",
     "core-js": "^2.5.3",
-    "js-cookie": "^2.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-motion": "^0.5.2",

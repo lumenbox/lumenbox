@@ -1,12 +1,12 @@
 import { state } from 'cerebral/tags'
 import formSubmitted from '../../../signals/formSubmitted'
-import loginSuccess from '../chains/loginSuccess'
+import setUser from '../actions/setUser'
 import { goTo } from '@cerebral/router/operators'
 
 export default formSubmitted({
-  post: '/api/login',
+  post: '/api/session',
   form: state`auth.loginForm`,
   isLoading: state`auth.isLoading`,
-  successChain: [...loginSuccess, goTo('/')],
+  successChain: [setUser, goTo('/')],
   unauthorisedMessage: 'Login failed'
 })
