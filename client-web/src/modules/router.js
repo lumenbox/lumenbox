@@ -3,6 +3,8 @@ import Router from '@cerebral/router'
 export default Router({
   routes: [
     { path: '/', signal: 'app.dashboardRouted' },
+    { path: '/account/new', signals: 'accounts.newAccountRouted' },
+    { path: '/account/:accountId', signals: 'accounts.accountRouted' },
     { path: '/login', signal: 'auth.loginRouted' },
     { path: '/register', signal: 'auth.registerRouted' },
     { path: '/register-complete', signal: 'auth.registerCompleteRouted' },
