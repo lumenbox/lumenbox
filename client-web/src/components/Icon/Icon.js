@@ -1,9 +1,12 @@
 import * as React from 'react'
 
-const Icon = ({ name }) => (
-  <span className="icon">
+const Icon = ({ name, noWrap }) =>
+  noWrap ? (
     <i className={`fas fa-${name}`} />
-  </span>
-)
+  ) : (
+    <span className="icon">
+      <i className={`fas fa-${name}`} />
+    </span>
+  )
 
 export default Icon
