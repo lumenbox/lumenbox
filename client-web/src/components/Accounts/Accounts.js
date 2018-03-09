@@ -17,7 +17,7 @@ const NoAccounts = styled.td`
   font-weight: 500;
 `
 
-const Accounts = ({ user, accounts, domains }) => (
+const Accounts = ({ user = { limit: 0 }, accounts, domains }) => (
   <section className="section">
     <h2 className="title is-2">Accounts</h2>
 
