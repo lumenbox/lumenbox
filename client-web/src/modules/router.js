@@ -5,7 +5,6 @@ export default Router({
     { path: '/', signal: 'app.dashboardRouted' },
     { path: '/account/new', signals: 'accounts.newAccountRouted' },
     { path: '/account/:accountId', signals: 'accounts.accountRouted' },
-    { path: '/login', signal: 'auth.loginRouted' },
     { path: '/register', signal: 'auth.registerRouted' },
     { path: '/register-complete', signal: 'auth.registerCompleteRouted' },
     { path: '/change-password', signal: 'auth.changePasswordRouted' },

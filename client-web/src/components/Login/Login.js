@@ -7,7 +7,6 @@ import Input from '../Input'
 
 const Login = ({ isLoading, loginForm, fieldChanged, loginFormSubmitted }) => (
   <section className="section">
-    <h1 className="title is-1">Dashboard</h1>
     <form
       className="container"
       onSubmit={

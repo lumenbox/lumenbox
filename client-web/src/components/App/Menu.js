@@ -6,11 +6,20 @@ import * as classNames from 'classnames'
 const Menu = ({ user, showMobileMenu, page, isLogoutLoading, logoutClicked }) => (
   <div className={classNames('navbar-menu', { 'is-active': showMobileMenu })}>
     <div className="navbar-start">
-      {!user && [
-        <a key="register" className={classNames('navbar-item', { 'is-active': page === 'register' })} href="/register">
-          Register
-        </a>
-      ]}
+      {user
+        ? [
+            <a key="dashboard" className={classNames('navbar-item', { 'is-active': page === 'dashboard' })} href="/">
+              Dashboard
+            </a>
+          ]
+        : [
+            <a
+              key="register"
+              className={classNames('navbar-item', { 'is-active': page === 'register' })}
+              href="/register">
+              Register
+            </a>
+          ]}
     </div>
     <div className="navbar-end">
       {user ? (
@@ -29,7 +38,7 @@ const Menu = ({ user, showMobileMenu, page, isLogoutLoading, logoutClicked }) =>
           </a>
         ]
       ) : (
-        <a key="login" className={classNames('navbar-item', { 'is-active': page === 'login' })} href="/login">
+        <a key="login" className="navbar-item" href="/">
           Login
         </a>
       )}

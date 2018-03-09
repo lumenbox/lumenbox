@@ -56,10 +56,17 @@ const App = ({ initialized, showMobileMenu, page, mobileMenuToggled, Component }
 export default connect(
   {
     initialized: state`app.initialized`,
+    user: state`auth.user`,
     showMobileMenu: state`app.showMobileMenu`,
     page: state`app.page`,
     mobileMenuToggled: signal`app.mobileMenuToggled`
   },
-  props => Object.assign({ Component: components[props.page] || NotFound }, props),
+  props =>
+    Object.assign(
+      {
+        Component: props.user || props.page === 'register' ? components[props.page] || NotFound : login
+      },
+      props
+    ),
   App
 )
