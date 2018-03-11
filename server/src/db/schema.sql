@@ -83,7 +83,6 @@ CREATE TABLE account (
   memo text NOT NULL DEFAULT '',
   memo_type text NOT NULL DEFAULT '',
   signature text NOT NULL DEFAULT '',
-  rev_signature text NOT NULL DEFAULT '',
   user_id integer NOT NULL,
   CONSTRAINT account_pkey PRIMARY KEY (id),
   CONSTRAINT domain_fkey FOREIGN KEY (domain_id) REFERENCES domain (id) MATCH SIMPLE,

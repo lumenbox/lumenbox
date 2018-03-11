@@ -2,9 +2,7 @@ const pick = require('lodash/pick')
 const changeCase = require('change-case-object')
 
 const prepareAccount = account =>
-  changeCase.camelCase(
-    pick(account, ['id', 'account', 'name', 'domain_id', 'memo', 'memo_type', 'signature', 'rev_signature'])
-  )
+  changeCase.camelCase(pick(account, ['id', 'account', 'name', 'domain_id', 'memo', 'memo_type', 'signature']))
 const sendAccount = (res, account) =>
   res.status(200).send({
     account: prepareAccount(account)
@@ -56,14 +54,11 @@ module.exports = ({ app, pool, config, authorise }) => {
     .post(authorise, verifyDomain, (req, res) => {
       const execPost = () => {
         const params = req.domain.system
-          ? [...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType'), '', '', req.user.id]
-          : [
-              ...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType', 'signature', 'revSignature'),
-              req.user.id
-            ]
+          ? [...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType'), '', req.user.id]
+          : [...values(req.body, 'account', 'name', 'domainId', 'memo', 'memoType', 'signature'), req.user.id]
         pool.query(
-          'insert into "account" (account, name, domain_id, memo, memo_type, signature, rev_signature, user_id) ' +
-            'values ($1, $2, $3, $4, $5, $6) returning *',
+          'insert into "account" (account, name, domain_id, memo, memo_type, signature, user_id) ' +
+            'values ($1, $2, $3, $4, $5, $6, $7) returning *',
           params,
           (err, result) => {
             if (err) {
@@ -91,16 +86,12 @@ module.exports = ({ app, pool, config, authorise }) => {
     })
     .put(authorise, verifyDomain, (req, res) => {
       const params = req.domain.system
-        ? [...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType'), '', '', req.user.id]
-        : [
-            ...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType', 'signature', 'revSignature'),
-            req.user.id
-          ]
+        ? [...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType'), '', req.user.id]
+        : [...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType', 'signature'), req.user.id]
       pool.query(
         'update "account" ' +
-          'set account = $2, name = $3, domain_id = $4, memo = $5, ' +
-          'memo_type = $6, signature = $7, rev_signature = $8) ' +
-          'where user_id = $9 && id = $1',
+          'set account = $2, name = $3, domain_id = $4, memo = $5, memo_type = $6, signature = $7 ' +
+          'where user_id = $8 && id = $1',
         params,
         (err, result) => {
           if (err) {

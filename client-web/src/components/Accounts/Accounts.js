@@ -52,7 +52,7 @@ const Accounts = ({ user = { limit: 0 }, accounts, domains }) => (
             </td>
             <td>
               <A href={`/account/${account.id}`}>
-                <Icon name={account.signature && account.revSignature ? 'check-square' : 'square'} />
+                <Icon name={account.signature ? 'check-square' : 'square'} />
               </A>
             </td>
           </tr>
