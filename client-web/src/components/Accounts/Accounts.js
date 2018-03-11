@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import accounts from '../../computes/accounts'
 import styled from 'styled-components'
 import Icon from '../Icon'
+import Button from '../Button'
 
 const A = styled.a`
   display: block;
@@ -61,18 +62,18 @@ const Accounts = ({ user = { limit: 0 }, accounts, domains }) => (
 
     <div className="field is-grouped is-grouped-right">
       <div className="control">
-        <a
-          className="button is-link"
+        <Button
+          className="is-link"
           href="/account/new"
           disabled={accounts.length >= user.limit}
+          icon="plus"
           title={
             user.limit > 0 && accounts.length >= user.limit
               ? 'Maximum number of accounts have already been created'
               : ''
           }>
-          <Icon name="plus" />
-          <span>Add Account</span>
-        </a>
+          Add Account
+        </Button>
       </div>
     </div>
   </section>
