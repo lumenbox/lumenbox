@@ -86,7 +86,8 @@ CREATE TABLE account (
   user_id integer NOT NULL,
   CONSTRAINT account_pkey PRIMARY KEY (id),
   CONSTRAINT domain_fkey FOREIGN KEY (domain_id) REFERENCES domain (id) MATCH SIMPLE,
-  CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES "user" (id) MATCH SIMPLE
+  CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES "user" (id) MATCH SIMPLE,
+  CONSTRAINT name_domain_unique UNIQUE (name, domain_id)
 )
 WITH (
   OIDS = FALSE
