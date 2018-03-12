@@ -107,7 +107,7 @@ module.exports = ({ app, pool, config, authorise }) => {
     .route('/api/account/:id')
     .get(authorise, (req, res) => {
       pool.query(
-        'select * from "account" where user_id = $1 && id = $2',
+        'select * from "account" where user_id = $1 and id = $2',
         [req.user.id, req.params.id],
         (err, result) => {
           if (err) {
@@ -119,13 +119,15 @@ module.exports = ({ app, pool, config, authorise }) => {
       )
     })
     .put(authorise, verifyDomain, validateAccount, (req, res) => {
+      const memo = req.body.memoType.length > 0 ? req.body.memo : ''
       const params = req.domain.system
-        ? [...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType'), '', req.user.id]
-        : [...values(req.body, 'id', 'account', 'name', 'domainId', 'memo', 'memoType', 'signature'), req.user.id]
+        ? [...values(req.body, 'id', 'account', 'name', 'domainId', 'memoType'), '', memo, req.user.id]
+        : [...values(req.body, 'id', 'account', 'name', 'domainId', 'memoType', 'signature'), memo, req.user.id]
+      console.log(params)
       pool.query(
         'update "account" ' +
-          'set account = $2, name = $3, domain_id = $4, memo = $5, memo_type = $6, signature = $7 ' +
-          'where user_id = $8 && id = $1',
+          'set "account" = $2, name = $3, domain_id = $4, memo_type = $5, signature = $6, memo = $7 ' +
+          'where user_id = $8 and id = $1',
         params,
         (err, result) => {
           if (err) {
@@ -137,12 +139,16 @@ module.exports = ({ app, pool, config, authorise }) => {
       )
     })
     .delete(authorise, (req, res) => {
-      pool.query('delete from "account" where user_id = $1 && id = $2', [req.user.id, req.params.id], (err, result) => {
-        if (err) {
-          console.error('failed to delete account', err)
-          return res.status(500).send({ error: 'Unxpected Error' })
+      pool.query(
+        'delete from "account" where user_id = $1 and id = $2',
+        [req.user.id, req.params.id],
+        (err, result) => {
+          if (err) {
+            console.error('failed to delete account', err)
+            return res.status(500).send({ error: 'Unxpected Error' })
+          }
+          res.sendStatus(200)
         }
-        res.sendStatus(200)
-      })
+      )
     })
 }

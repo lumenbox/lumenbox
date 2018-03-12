@@ -10,6 +10,7 @@ export default options =>
       isLoading: false,
       selectedAccountId: null,
       accountForm: {
+        id: {},
         account: { value: '', isRequired: true, validationRules: ['isPublicKey'] },
         name: { value: '', isRequired: true, validationRules: [/^[a-z.@-]{4,32}$/] },
         domainId: { value: null, isRequired: true },

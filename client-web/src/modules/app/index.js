@@ -3,6 +3,7 @@ import mobileMenuToggled from './signals/mobileMenuToggled'
 import initialized from './signals/initialized'
 import notificationDismissed from './signals/notificationDismissed'
 import routed from '../../signals/routed'
+import dashboardRouted from './signals/dashboardRouted'
 
 export default options =>
   Module(({ controller }) => {
@@ -21,7 +22,7 @@ export default options =>
         initialized,
         mobileMenuToggled,
         notificationDismissed,
-        dashboardRouted: routed('dashboard'),
+        dashboardRouted,
         notFoundRouted: routed('notFound')
       }
     }

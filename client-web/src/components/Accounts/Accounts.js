@@ -46,13 +46,15 @@ const Accounts = ({ user = { limit: 0 }, accounts, domains }) => (
               </A>
             </td>
             <td>
-              <A href={`/account/${account.id}`}>{account.memo}</A>
+              <A href={`/account/${account.id}`}>{account.memo}&nbsp;</A>
             </td>
             <td>
               <A
                 href={`/account/${account.id}`}
-                title={config.memoTypes.find(memoType => memoType.value === account.memoType).description}>
-                {config.memoTypes.find(memoType => memoType.value === account.memoType).label}
+                title={
+                  account.memoType && config.memoTypes.find(memoType => memoType.value === account.memoType).description
+                }>
+                {account.memoType && config.memoTypes.find(memoType => memoType.value === account.memoType).label}&nbsp;
               </A>
             </td>
             <td>
