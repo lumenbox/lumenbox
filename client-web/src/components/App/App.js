@@ -3,6 +3,7 @@ import { connect } from '@cerebral/react'
 import { state, signal } from 'cerebral/tags'
 import * as classNames from 'classnames'
 import './App.css'
+import logo from './logo.png'
 import NotFound from '../NotFound'
 import SplashScreen from '../SplashScreen'
 import Menu from './Menu'
@@ -35,7 +36,7 @@ const App = ({ initialized, showMobileMenu, page, mobileMenuToggled, Component }
       <nav className="navbar is-dark" aria-label="main navigation">
         <div className="navbar-brand">
           <a className={classNames('navbar-item', { 'is-active': page === 'dashboard' })} href="/">
-            LumenBox
+            <img src={logo} />
           </a>
           <button
             className={classNames('button', 'navbar-burger', 'is-dark', { 'is-active': showMobileMenu })}
