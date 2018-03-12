@@ -31,7 +31,8 @@ const Account = ({ isLoading, accountId, accountForm, domains, domainList, field
         ) : accountForm.nameAvailability.value ? (
           <Icon key="available" name="check" className="has-text-success" />
         ) : (
-          <Icon key="taken" name="times" className="has-text-danger" />
+          !accountForm.name.isPristine &&
+          !accountForm.domainId.isPristine && <Icon key="taken" name="times" className="has-text-danger" />
         )}
       </h4>
       <Input
@@ -40,7 +41,7 @@ const Account = ({ isLoading, accountId, accountForm, domains, domainList, field
         placeholder="enter your account name"
         {...accountForm.name}
         errorMessage={
-          !accountForm.name.isValid && 'can only contain a-z@. and must be between 4 and 32 characters long'
+          !accountForm.name.isValid && 'can only contain a-z.@- and must be between 4 and 32 characters long'
         }
         onChange={value => fieldChanged({ name: 'accountForm.name', value })}
       />

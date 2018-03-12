@@ -6,6 +6,7 @@ import accounts from '../../computes/accounts'
 import styled from 'styled-components'
 import Icon from '../Icon'
 import Button from '../Button'
+import config from '../../config'
 
 const A = styled.a`
   display: block;
@@ -25,7 +26,7 @@ const Accounts = ({ user = { limit: 0 }, accounts, domains }) => (
     <table className={classNames('table', 'is-striped', 'is-fullwidth', { 'is-hoverable': accounts.length })}>
       <thead>
         <tr>
-          <th>Address</th>
+          <th>Name</th>
           <th>Memo</th>
           <th>Memo Type</th>
           <th>Signed</th>
@@ -40,19 +41,27 @@ const Accounts = ({ user = { limit: 0 }, accounts, domains }) => (
         {accounts.map(account => (
           <tr key={account.id}>
             <td>
-              <A href={`/account/${account.id}`}>
-                {account.name}*{domains[account.domainId].name}
+              <A href={`/account/${account.id}`} title={account.account}>
+                {account.name}*{domains[account.domainId].domain}
               </A>
             </td>
             <td>
               <A href={`/account/${account.id}`}>{account.memo}</A>
             </td>
             <td>
-              <A href={`/account/${account.id}`}>{account.memoType}</A>
+              <A
+                href={`/account/${account.id}`}
+                title={config.memoTypes.find(memoType => memoType.value === account.memoType).description}>
+                {config.memoTypes.find(memoType => memoType.value === account.memoType).label}
+              </A>
             </td>
             <td>
               <A href={`/account/${account.id}`}>
-                <Icon name={account.signature ? 'check-square' : 'square'} />
+                {account.signature ? (
+                  <Icon name="check" className="has-text-success" />
+                ) : (
+                  <Icon name="times" className="has-text-danger" />
+                )}
               </A>
             </td>
           </tr>
