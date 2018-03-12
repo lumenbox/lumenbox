@@ -36,6 +36,22 @@ module.exports = ({ app, pool, config, authorise }) => {
     })
   })
 
+  app.post('/api/verify-account', authorise, verifyDomain, (req, res) => {
+    pool.query(
+      `select count(*) as count from "account" where name = $1 and domain_id = $2${
+        req.body.accountId ? ' and id <> $3' : ''
+      }`,
+      req.body.accountId ? [req.body.name, req.body.domainId, req.body.accountId] : [req.body.name, req.body.domainId],
+      (err, result) => {
+        if (err) {
+          console.error('failed to verify account', err)
+          return res.status(500).send({ error: 'Unxpected Error' })
+        }
+        res.sendStatus(result.rows[0].count > 0 ? 200 : 404)
+      }
+    )
+  })
+
   app
     .route('/api/account/:id')
     .get(authorise, (req, res) => {

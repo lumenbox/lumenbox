@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as classNames from 'classnames'
 
-const Field = ({ id, label, icon, isPristine = true, hideValidationIcon = false, errorMessage, children }) => (
+const Field = ({ id, label, icon, isPristine = true, isValid, hideValidationIcon = false, errorMessage, children }) => (
   <div className="field is-horizontal">
     {label && (
       <div className="field-label is-normal">
@@ -17,9 +17,9 @@ const Field = ({ id, label, icon, isPristine = true, hideValidationIcon = false,
           })}>
           {children}
         </div>
+        {errorMessage && !isValid && !isPristine && <p className="help is-danger">{errorMessage}</p>}
       </div>
     </div>
-    {errorMessage && <p className="help is-danger">{errorMessage}</p>}
   </div>
 )
 

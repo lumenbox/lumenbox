@@ -4,6 +4,7 @@ import Modules from './modules'
 import FormsProvider from '@cerebral/forms'
 import HttpProvider from '@cerebral/http'
 import config from './config'
+import { StrKey } from 'stellar-base/lib/strkey'
 
 export default Controller(
   Module({
@@ -11,7 +12,9 @@ export default Controller(
     modules: Modules({}),
     providers: {
       forms: FormsProvider({
-        rules: {},
+        rules: {
+          isPublicKey: (value, arg, get) => StrKey.isValidEd25519PublicKey(value)
+        },
         errorMessages: {}
       }),
       http: HttpProvider({

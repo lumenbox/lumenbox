@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Field from '../Field'
 
-const Select = ({ id, label, placeholder, onChange, options, value, isPristine, isValid, errorMessage }) => (
-  <Field {...{ id, label, isPristine, errorMessage }}>
+const Select = ({ id, label, placeholder, onChange, options = [], value, isPristine, isValid, errorMessage }) => (
+  <Field {...{ id, label, isPristine, isValid, errorMessage }}>
     <div className="select">
       <select
         id={id}
@@ -13,12 +13,11 @@ const Select = ({ id, label, placeholder, onChange, options, value, isPristine, 
             {placeholder}
           </option>
         )}
-        {options &&
-          options.map((option, i) => (
-            <option key={i} value={option.value} disabled={option.disabled}>
-              {option.label}
-            </option>
-          ))}
+        {options.map((option, i) => (
+          <option key={i} value={option.value} disabled={option.disabled}>
+            {option.label}
+          </option>
+        ))}
       </select>
     </div>
   </Field>

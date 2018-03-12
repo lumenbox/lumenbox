@@ -8,6 +8,8 @@ import Input from '../Input'
 import Select from '../Select'
 import domains from '../../computes/domains'
 import config from '../../config'
+import Icon from '../Icon'
+import Spinner from '../Spinner'
 
 const Account = ({ isLoading, accountId, accountForm, domains, domainList, fieldChanged, accountFormSubmitted }) => (
   <section className="section">
@@ -23,13 +25,23 @@ const Account = ({ isLoading, accountId, accountForm, domains, domainList, field
       <h4 className="subtitle">
         {accountForm.name.value || 'name'}*{accountForm.domainId.value
           ? domains[accountForm.domainId.value].domain
-          : 'domain'}
+          : 'domain'}{' '}
+        {accountForm.nameAvailability.value === null ? (
+          <Spinner key="checking" />
+        ) : accountForm.nameAvailability.value ? (
+          <Icon key="available" name="check" className="has-text-success" />
+        ) : (
+          <Icon key="taken" name="times" className="has-text-danger" />
+        )}
       </h4>
       <Input
         label="Name"
         type="text"
         placeholder="enter your account name"
         {...accountForm.name}
+        errorMessage={
+          !accountForm.name.isValid && 'can only contain a-z@. and must be between 4 and 32 characters long'
+        }
         onChange={value => fieldChanged({ name: 'accountForm.name', value })}
       />
       <Select
@@ -44,6 +56,7 @@ const Account = ({ isLoading, accountId, accountForm, domains, domainList, field
         type="text"
         placeholder="your lumen public key"
         {...accountForm.account}
+        errorMessage={!accountForm.account.isValid && 'must be a valid public key'}
         onChange={value => fieldChanged({ name: 'accountForm.account', value })}
       />
       <Select
@@ -70,7 +83,7 @@ const Account = ({ isLoading, accountId, accountForm, domains, domainList, field
         <div className="control">
           <Button
             type="submit"
-            className={classNames('submit-button', 'is-success', { 'is-loading': isLoading })}
+            className={classNames('submit-button', 'is-link', { 'is-loading': isLoading })}
             disabled={!accountForm.isValid}>
             {accountId ? 'Save' : 'Create'}
           </Button>
@@ -89,10 +102,6 @@ export default connect(
     domainList: domains,
     fieldChanged: signal`accounts.fieldChanged`,
     accountFormSubmitted: signal`accounts.accountFormSubmitted`
-  },
-  (props, originalProps) => {
-    console.log(props.domainList)
-    return props
   },
   Account
 )

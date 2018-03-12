@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as classNames from 'classnames'
 import Field from '../Field'
+import Icon from '../Icon'
 
 const Input = ({
   id,
@@ -17,7 +18,7 @@ const Input = ({
   minLength,
   autoComplete = 'on'
 }) => (
-  <Field {...{ id, label, icon, isPristine, hideValidationIcon, errorMessage }}>
+  <Field {...{ id, label, icon, isPristine, isValid, hideValidationIcon, errorMessage }}>
     <input
       className={classNames('input', { 'is-danger': !isPristine && !isValid })}
       type={type}
@@ -29,25 +30,13 @@ const Input = ({
       readOnly={!onChange}
       autoComplete={autoComplete}
     />
-    {icon && (
-      <span className="icon is-small is-left">
-        <i className={`fa fa-${icon}`} />
-      </span>
-    )}
+    {icon && <Icon className="is-small is-left" name={icon} />}
     {!hideValidationIcon &&
       !isPristine &&
-      isValid && (
-        <span className="icon is-small is-right">
-          <i className="fa fa-check" />
-        </span>
-      )}
+      isValid && <Icon className="is-small is-right has-text-success" name="check" />}
     {!hideValidationIcon &&
       !isPristine &&
-      !isValid && (
-        <span className="icon is-small is-right">
-          <i className="fa fa-warning" />
-        </span>
-      )}
+      !isValid && <Icon className="is-small is-right has-text-danger" name="times" />}
   </Field>
 )
 

@@ -1,11 +1,12 @@
 import * as React from 'react'
+import classNames from 'classnames'
 
-const Icon = ({ name, noWrap }) =>
+const Icon = ({ className, name, noWrap }) =>
   noWrap ? (
-    <i className={`fas fa-${name}`} />
+    <i className={classNames('fas', `fa-${name}`, className)} />
   ) : (
-    <span className="icon">
-      <i className={`fas fa-${name}`} />
+    <span className={classNames('icon', className)}>
+      <i className={classNames('fas', `fa-${name}`)} />
     </span>
   )
 

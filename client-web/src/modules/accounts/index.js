@@ -2,7 +2,7 @@ import { Module } from 'cerebral'
 import accountRouted from './signals/accountRouted'
 import newAccountRouted from './signals/newAccountRouted'
 import accountFormSubmitted from './signals/accountFormSubmitted'
-import FieldChanged from '../../signals/fieldChanged'
+import fieldChanged from './signals/fieldChanged'
 
 export default options =>
   Module({
@@ -10,18 +10,19 @@ export default options =>
       isLoading: false,
       selectedAccountId: null,
       accountForm: {
-        account: { value: '', required: true },
-        name: { value: '', required: true },
-        domainId: { value: null, required: true },
-        memo: { value: '', required: true },
-        memoType: { value: '', required: true }
+        account: { value: '', isRequired: true, validationRules: ['isPublicKey'] },
+        name: { value: '', isRequired: true, validationRules: [/^[a-z.@-]{4,32}$/] },
+        domainId: { value: null, isRequired: true },
+        nameAvailability: { value: false, validationRules: ['isTrue'] },
+        memo: { value: '' },
+        memoType: { value: '' }
       },
       data: {}
     },
     signals: {
       accountRouted,
       newAccountRouted,
-      fieldChanged: FieldChanged('accounts'),
+      fieldChanged,
       accountFormSubmitted
     }
   })
