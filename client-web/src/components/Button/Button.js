@@ -3,13 +3,14 @@ import classNames from 'classnames'
 
 import Icon from '../Icon'
 
-const Button = ({ className, style, href, onClick, icon, children, title }) =>
+const Button = ({ className, style, href, onClick, icon, type, children, title }) =>
   React.createElement(
     href ? 'a' : 'button',
     {
       className: classNames('button', className),
       style,
       href,
+      type,
       title,
       disabled: !href && !onClick
     },

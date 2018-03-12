@@ -11,6 +11,7 @@ import Footer from './Footer'
 import Notifications from '../Notifications'
 
 import dashboard from '../Dashboard'
+import account from '../Account'
 import register from '../Register'
 import registerComplete from '../RegisterComplete'
 import login from '../Login'
@@ -20,6 +21,7 @@ import passwordReset from '../PasswordReset'
 
 let components = {
   dashboard,
+  account,
   register,
   registerComplete,
   login,
@@ -36,7 +38,7 @@ const App = ({ initialized, showMobileMenu, page, mobileMenuToggled, Component }
       <nav className="navbar is-dark" aria-label="main navigation">
         <div className="navbar-brand">
           <a className={classNames('navbar-item', { 'is-active': page === 'dashboard' })} href="/">
-            <img src={logo} />
+            <img src={logo} alt="" />
           </a>
           <button
             className={classNames('button', 'navbar-burger', 'is-dark', { 'is-active': showMobileMenu })}
