@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const LocalStrategy = require('passport-local').Strategy
+const changeCase = require('change-case-object')
 
 const generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 const verifyHash = (password, passwordHash) => bcrypt.compareSync(password, passwordHash)
@@ -43,11 +44,11 @@ module.exports = {
           if (err) {
             return done(err)
           }
-          const user = res.rows[0]
+          const user = changeCase.camelCase(res.rows[0])
           if (!user) {
             return done(null, false)
           }
-          if (!password || verifyHash(password, user.password_hash)) {
+          if (!password || verifyHash(password, user.passwordHash)) {
             return done(null, false)
           }
           return done(null, user)
