@@ -14,11 +14,24 @@ module.exports = {
     user: process.env.DB_USER || '',
     password: process.env.DB_PASSWORD || '',
     host: process.env.DB_HOST || 'localhost',
-    port: 5432,
+    port: process.env.DB_PORT || 5432,
     ssl: false,
     max: 20, // set pool max size to 20
     min: 4, // set min pool size to 4
     idleTimeoutMillis: 1000, // close idle clients after 1 second
     connectionTimeoutMillis: 1000 // return an error after 1 second if connection could not be established
+  },
+  mail: {
+    host: process.env.MAIL_HOST || '',
+    port: process.env.MAIL_PORT || 465,
+    secure: true, // use TLS
+    auth: {
+      user: process.env.MAIL_USER || '',
+      pass: process.env.MAIL_PASSWORD || ''
+    },
+    tls: {
+      // do not fail on invalid certs
+      rejectUnauthorized: false
+    }
   }
 }

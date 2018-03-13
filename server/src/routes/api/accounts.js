@@ -1,3 +1,7 @@
+const sendMail = require('../../sendMail')
+const accountCreated = require('../../mail/accountCreated')
+const accountUpdated = require('../../mail/accountUpdated')
+const accountDeleted = require('../../mail/accountDeleted')
 const pick = require('lodash/pick')
 const changeCase = require('change-case-object')
 const StrKey = require('stellar-base/lib/strkey').StrKey
@@ -83,6 +87,7 @@ module.exports = ({ app, pool, config, authorise }) => {
             console.error('failed to add account', err)
             return res.status(500).send({ error: 'Unxpected Error' })
           }
+          sendMail(req.user, accountCreated, { domain: req.domain.domain, ...req.body })
           sendAccount(res, result.rows[0])
         }
       )
@@ -134,20 +139,34 @@ module.exports = ({ app, pool, config, authorise }) => {
             console.error('failed to update account', err)
             return res.status(500).send({ error: 'Unxpected Error' })
           }
+          sendMail(req.user, accountUpdated, { domain: req.domain.domain, ...req.body })
           res.sendStatus(200)
         }
       )
     })
     .delete(authorise, (req, res) => {
       pool.query(
-        'delete from "account" where user_id = $1 and id = $2',
+        'select "account".name, "account"."account", domain.domain from "account", domain ' +
+          'where "account".domain_id = domain.id and "account".user_id = $1 and "account".id = $2',
         [req.user.id, req.params.id],
         (err, result) => {
           if (err) {
             console.error('failed to delete account', err)
             return res.status(500).send({ error: 'Unxpected Error' })
           }
-          res.sendStatus(200)
+          const account = result.rows[0]
+          pool.query(
+            'delete from "account" where user_id = $1 and id = $2',
+            [req.user.id, req.params.id],
+            (err, result) => {
+              if (err) {
+                console.error('failed to delete account', err)
+                return res.status(500).send({ error: 'Unxpected Error' })
+              }
+              sendMail(req.user, accountDeleted, account)
+              res.sendStatus(200)
+            }
+          )
         }
       )
     })

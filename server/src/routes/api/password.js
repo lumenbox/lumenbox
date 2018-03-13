@@ -1,3 +1,5 @@
+const sendMail = require('../../sendMail')
+const passwordChanged = require('../../mail/passwordChanged')
 const { generateHash, verifyHash } = require('../../passport/local')
 
 module.exports = ({ app, pool, config, authorise }) => {
@@ -13,6 +15,7 @@ module.exports = ({ app, pool, config, authorise }) => {
           console.error('failed to change password', err)
           return res.status(500).send({ error: 'Unxpected Error' })
         }
+        sendMail(req.user, passwordChanged)
         res.sendStatus(200)
       }
     )
