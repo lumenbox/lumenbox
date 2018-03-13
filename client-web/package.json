@@ -9,7 +9,7 @@
   },
   "author": "Garth Williams",
   "license": "UNLICENSED",
-  "homepage": "https://bitbucket.org/lumenbox/lumenbox#readme",
+  "homepage": "/",
   "scripts": {
     "prestart:css": "yarn build:css",
     "start:css": "yarn build:css --watch",
