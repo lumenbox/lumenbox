@@ -62,7 +62,11 @@ const Accounts = ({ user = { limit: 0 }, accounts, domains }) => (
                 {account.signature ? (
                   <Icon key="signed" name="check" className="has-text-success" />
                 ) : (
-                  <Icon key="pending" name="hourglass-half" />
+                  <Icon
+                    key="pending"
+                    name="hourglass-half"
+                    title="For security reasons, federation record signing is an offline process. It normally takes just a few minutes, but it can sometimes take longer. We will send you an email soon as the account is ready to use."
+                  />
                 )}
               </A>
             </td>
