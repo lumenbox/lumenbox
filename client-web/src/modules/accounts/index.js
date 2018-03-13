@@ -3,6 +3,9 @@ import accountRouted from './signals/accountRouted'
 import newAccountRouted from './signals/newAccountRouted'
 import accountFormSubmitted from './signals/accountFormSubmitted'
 import fieldChanged from './signals/fieldChanged'
+import deleteAccountClicked from './signals/deleteAccountClicked'
+import deleteAccountConfirmed from './signals/deleteAccountConfirmed'
+import deleteAccountCanceled from './signals/deleteAccountCanceled'
 
 export default options =>
   Module({
@@ -18,12 +21,16 @@ export default options =>
         memo: { value: '' },
         memoType: { value: '' }
       },
+      showConformDelete: false,
       data: {}
     },
     signals: {
       accountRouted,
       newAccountRouted,
       fieldChanged,
-      accountFormSubmitted
+      accountFormSubmitted,
+      deleteAccountClicked,
+      deleteAccountConfirmed,
+      deleteAccountCanceled
     }
   })

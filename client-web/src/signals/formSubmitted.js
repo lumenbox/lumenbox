@@ -1,4 +1,4 @@
-import { httpPost, httpPut } from '@cerebral/http/operators'
+import { httpPost, httpPut, httpDelete } from '@cerebral/http/operators'
 import { set } from 'cerebral/operators'
 import { props } from 'cerebral/tags'
 import { isValidForm, resetForm } from '@cerebral/forms/operators'
@@ -9,6 +9,7 @@ import formToJson from '../actions/formToJson'
 export default ({
   post,
   put,
+  deletePath,
   form,
   isLoading,
   successMessage,
@@ -17,20 +18,30 @@ export default ({
   unauthorisedChain = [],
   errorMessage = 'Unexpected Error',
   errorChain = []
-}) => [
-  isValidForm(form),
-  {
-    true: [
-      ...(isLoading ? [set(isLoading, true)] : []),
-      formToJson(props`formData`, form),
-      post ? httpPost(post, props`formData`) : httpPut(put, props`formData`),
-      {
-        '401': [parseError(unauthorisedMessage), notify('ERROR', props`errorMessage`), ...unauthorisedChain],
-        success: [...(successMessage ? [notify('SUCCESS', successMessage)] : []), resetForm(form), ...successChain],
-        error: [parseError(errorMessage), notify('ERROR', props`errorMessage`), ...errorChain]
-      },
-      ...(isLoading ? [set(isLoading, false)] : [])
-    ],
-    false: []
-  }
-]
+}) => {
+  const chain = [
+    ...(isLoading ? [set(isLoading, true)] : []),
+    ...(form ? [formToJson(props`formData`, form)] : []),
+    deletePath ? httpDelete(deletePath) : post ? httpPost(post, props`formData`) : httpPut(put, props`formData`),
+    {
+      '401': [parseError(unauthorisedMessage), notify('ERROR', props`errorMessage`), ...unauthorisedChain],
+      success: [
+        ...(successMessage ? [notify('SUCCESS', successMessage)] : []),
+        ...(form ? [resetForm(form)] : []),
+        ...successChain
+      ],
+      error: [parseError(errorMessage), notify('ERROR', props`errorMessage`), ...errorChain]
+    },
+    ...(isLoading ? [set(isLoading, false)] : [])
+  ]
+
+  return form
+    ? [
+        isValidForm(form),
+        {
+          true: chain,
+          false: []
+        }
+      ]
+    : chain
+}

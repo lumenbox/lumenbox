@@ -31,7 +31,7 @@
     "compression": "^1.7.2",
     "connect-pg-simple": "^4.2.1",
     "cookie-parser": "^1.4.3",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "express-history-api-fallback": "^2.2.1",
     "express-session": "^1.15.6",
     "lodash": "^4.17.5",

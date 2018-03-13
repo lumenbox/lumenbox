@@ -10,8 +10,22 @@ import domains from '../../computes/domains'
 import config from '../../config'
 import Icon from '../Icon'
 import Spinner from '../Spinner'
+import Dialog from '../Dialog'
 
-const Account = ({ isLoading, accountId, accountForm, domains, domainList, fieldChanged, accountFormSubmitted }) => (
+const Account = ({
+  isLoading,
+  accountId,
+  accountForm,
+  accountName,
+  domains,
+  domainList,
+  showConformDelete,
+  fieldChanged,
+  accountFormSubmitted,
+  deleteAccountClicked,
+  deleteAccountConfirmed,
+  deleteAccountCanceled
+}) => (
   <section className="section">
     <form
       className="container"
@@ -21,20 +35,38 @@ const Account = ({ isLoading, accountId, accountForm, domains, domainList, field
           accountFormSubmitted()
         }
       }>
-      <h1 className="title">Account</h1>
-      <h4 className="subtitle">
-        {accountForm.name.value || 'name'}*{accountForm.domainId.value
-          ? domains[accountForm.domainId.value].domain
-          : 'domain'}{' '}
-        {accountForm.nameAvailability.value === null ? (
-          <Spinner key="checking" />
-        ) : accountForm.nameAvailability.value ? (
-          <Icon key="available" name="check" className="has-text-success" />
-        ) : (
-          !accountForm.name.isPristine &&
-          !accountForm.domainId.isPristine && <Icon key="taken" name="times" className="has-text-danger" />
-        )}
-      </h4>
+      <div className="columns">
+        <div className="column">
+          <h1 className="title">Account</h1>
+          <h4 className="subtitle">
+            {accountName}{' '}
+            {accountForm.nameAvailability.value === null ? (
+              <Spinner key="checking" />
+            ) : accountForm.nameAvailability.value ? (
+              <Icon key="available" name="check" className="has-text-success" />
+            ) : (
+              !accountForm.name.isPristine &&
+              !accountForm.domainId.isPristine && <Icon key="taken" name="times" className="has-text-danger" />
+            )}
+          </h4>
+        </div>
+        <div className="column">
+          {accountId && (
+            <div className="field is-grouped is-grouped-right">
+              <div className="control">
+                <Button
+                  className="is-danger is-small"
+                  onClick={e => {
+                    e.preventDefault()
+                    deleteAccountClicked()
+                  }}>
+                  Delete
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
       <Input
         label="Name"
         type="text"
@@ -91,6 +123,16 @@ const Account = ({ isLoading, accountId, accountForm, domains, domainList, field
         </div>
       </div>
     </form>
+    <Dialog
+      isOpen={showConformDelete}
+      onClose={() => deleteAccountCanceled()}
+      onOk={() => deleteAccountConfirmed()}
+      title="Delete Account"
+      okLabel="Delete"
+      okClassName="is-danger"
+      cancelLabel="Cancel">
+      Are you sure you want to delete {accountName}?
+    </Dialog>
   </section>
 )
 
@@ -101,8 +143,21 @@ export default connect(
     accountForm: form(state`accounts.accountForm`),
     domains: state`domains.data`,
     domainList: domains,
+    showConformDelete: state`accounts.showConformDelete`,
     fieldChanged: signal`accounts.fieldChanged`,
-    accountFormSubmitted: signal`accounts.accountFormSubmitted`
+    accountFormSubmitted: signal`accounts.accountFormSubmitted`,
+    deleteAccountClicked: signal`accounts.deleteAccountClicked`,
+    deleteAccountConfirmed: signal`accounts.deleteAccountConfirmed`,
+    deleteAccountCanceled: signal`accounts.deleteAccountCanceled`
   },
+  props =>
+    Object.assign(
+      {
+        accountName: `${props.accountForm.name.value || 'name'}*${
+          props.accountForm.domainId.value ? props.domains[props.accountForm.domainId.value].domain : 'domain'
+        }`
+      },
+      props
+    ),
   Account
 )
