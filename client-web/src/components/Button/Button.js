@@ -9,7 +9,8 @@ const Button = ({ className, style, href, onClick, icon, type, children, title, 
     {
       className: classNames('button', className),
       style,
-      href,
+      href: disabled ? '' : href,
+      onClick: disabled ? () => {} : onClick,
       type,
       title,
       disabled
