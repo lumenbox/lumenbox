@@ -28,10 +28,6 @@ module.exports = {
     auth: {
       user: process.env.MAIL_USER || '',
       pass: process.env.MAIL_PASSWORD || ''
-    },
-    tls: {
-      // do not fail on invalid certs
-      rejectUnauthorized: false
     }
   }
 }
