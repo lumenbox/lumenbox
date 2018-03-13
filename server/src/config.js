@@ -6,7 +6,7 @@ module.exports = {
   isProduction: env === 'production',
   isTest: env === 'test',
   isDevelopment: env === 'development',
-  staticPath: '../../client-web/public',
+  staticPath: '../../client-web/build',
   sessionKey: '7a98281f6b1641fd921310f030e5817f',
   sessionTimeout: 30 * 24 * 60 * 60 * 1000, // 30 days
   db: {

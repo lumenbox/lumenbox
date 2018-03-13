@@ -8,14 +8,13 @@ COPY . /usr/src/app/
 # build the client app
 WORKDIR /usr/src/app/client-web
 RUN yarn install
-RUN NODE_ENV=production yarn build
+RUN yarn build
+RUN rm -r /usr/src/app/client-web/node_modules
 
 # prepare the server
 WORKDIR /usr/src/app/server
-RUN yarn install
+RUN yarn install --production
 
 # configure the runtime
-ENV NODE_ENV=production
-ENV PORT=3000
 CMD [ "/usr/local/bin/node", "/usr/src/app/server/src/index.js" ]
-EXPOSE 3000
+EXPOSE 3001
