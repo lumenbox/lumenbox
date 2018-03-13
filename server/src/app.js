@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const express = require('express')
+const fallback = require('express-history-api-fallback')
 const morgan = require('morgan')
 const compression = require('compression')
 const { Pool } = require('pg')
@@ -24,7 +25,7 @@ module.exports = config => {
 
   // serve static files
   app.use(
-    express.static(config.staticPath, {
+    express.static(path.join(__dirname, config.staticPath), {
       fallthrough: true,
       index: false
     })
@@ -66,6 +67,9 @@ module.exports = config => {
     })
   }
   load('routes', { app, pool, passport, config, authorise })
+
+  // push state fallback
+  app.use(fallback('index.html', { root: path.join(__dirname, config.staticPath) }))
 
   // return the app
   return app
