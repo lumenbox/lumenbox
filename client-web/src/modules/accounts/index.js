@@ -12,7 +12,7 @@ export default options =>
       accountForm: {
         id: {},
         account: { value: '', isRequired: true, validationRules: ['isPublicKey'] },
-        name: { value: '', isRequired: true, validationRules: [/^[a-z.@-]{4,32}$/] },
+        name: { value: '', isRequired: true, validationRules: [/^[a-z0-9.@-]{4,32}$/] },
         domainId: { value: null, isRequired: true },
         nameAvailability: { value: false, validationRules: ['isTrue'] },
         memo: { value: '' },

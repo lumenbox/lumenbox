@@ -41,7 +41,7 @@ const Account = ({ isLoading, accountId, accountForm, domains, domainList, field
         placeholder="enter your account name"
         {...accountForm.name}
         errorMessage={
-          !accountForm.name.isValid && 'can only contain a-z.@- and must be between 4 and 32 characters long'
+          !accountForm.name.isValid && 'can only contain a-z0-9.@- and must be between 4 and 32 characters long'
         }
         onChange={value => fieldChanged({ name: 'accountForm.name', value })}
       />

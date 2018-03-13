@@ -15,7 +15,7 @@ const values = (object, ...keys) => keys.map(key => object[key])
 const validateAccount = (req, res, next) => {
   const account = req.body
   if (
-    !/^[a-z.@-]{4,32}$/.test(account.name) ||
+    !/^[a-z0-9.@-]{4,32}$/.test(account.name) ||
     !StrKey.isValidEd25519PublicKey(account.account) ||
     !account.domainId ||
     typeof account.memo !== 'string' ||
