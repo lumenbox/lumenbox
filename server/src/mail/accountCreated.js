@@ -4,7 +4,7 @@ module.exports = (user, { domain, name, account }) => ({
   subject: 'LumenBox Account Created',
   text: wrap(
     user,
-    `A new LumenBox stellar federation account below has been updated.
+    `A new LumenBox stellar federation account has been created.
 
   ${name}*${domain} -> ${account}
   

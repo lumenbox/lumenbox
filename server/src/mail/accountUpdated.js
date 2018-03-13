@@ -4,10 +4,10 @@ module.exports = (user, { domain, name, account }) => ({
   subject: 'LumenBox Account Updated',
   text: wrap(
     user,
-    `The LumenBox stellar federation account has been created.
+    `The LumenBox stellar federation account below has been updated.
 
   ${name}*${domain} -> ${account}
   
-  Please note that it normally takes a few minutes for the offline secure signing process to generate a signature for your record, but it can sometimes take longer. We will send you an email soon as the account is ready to use.`
+Please note that it normally takes a few minutes for the offline secure signing process to generate a signature for your record, but it can sometimes take longer. We will send you an email soon as the account is ready to use.`
   )
 })
