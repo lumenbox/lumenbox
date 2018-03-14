@@ -66,7 +66,10 @@ export default connect(
   props =>
     Object.assign(
       {
-        Component: props.user || props.page === 'register' ? components[props.page] || NotFound : login
+        Component:
+          props.user || ['register', 'registerComplete', 'passwordResetRequest', 'passwordReset'].includes(props.page)
+            ? components[props.page] || NotFound
+            : login
       },
       props
     ),
