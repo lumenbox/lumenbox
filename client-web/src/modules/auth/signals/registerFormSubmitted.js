@@ -6,5 +6,5 @@ export default formSubmitted({
   post: '/api/user',
   form: state`auth.registerForm`,
   isLoading: state`auth.isLoading`,
-  successChain: [goTo('/')]
+  successChain: [goTo('/register-complete')]
 })

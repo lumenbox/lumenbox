@@ -7,5 +7,8 @@ export default {
   password: {
     value: '',
     isRequired: true
+  },
+  activationKey: {
+    value: undefined
   }
 }

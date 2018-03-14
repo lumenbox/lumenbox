@@ -24,7 +24,6 @@ let components = {
   account,
   register,
   registerComplete,
-  login,
   changePassword,
   passwordResetRequest,
   passwordReset

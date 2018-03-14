@@ -42,6 +42,7 @@ CREATE TABLE "user" (
   last_name text NOT NULL,
   email text NOT NULL,
   password_hash text,
+  activation_key text,
   "2fa_seed" text,
   "limit" integer NOT NULL DEFAULT 5,
   facebook_id text,
