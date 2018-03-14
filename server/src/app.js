@@ -34,11 +34,7 @@ module.exports = config => {
 
   // rate limit api calls
   app.enable('trust proxy')
-  var apiLimiter = new RateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100,
-    delayMs: 0 // disabled
-  })
+  var apiLimiter = new RateLimit(config.rateLimit.api)
   app.use('/api/', apiLimiter)
 
   // setup cookie and body parsing

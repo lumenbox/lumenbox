@@ -30,5 +30,33 @@ module.exports = {
       user: process.env.MAIL_USER || '',
       pass: process.env.MAIL_PASSWORD || ''
     }
+  },
+  rateLimit: {
+    api: {
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100,
+      delayMs: 0 // disabled
+    },
+    newUser: {
+      windowMs: 60 * 60 * 1000, // 1 hour window
+      delayAfter: 1, // begin slowing down responses after the first request
+      delayMs: 3 * 1000, // slow down subsequent responses by 3 seconds per request
+      max: 5, // start blocking after 5 requests
+      message: 'Too many accounts created from this IP, please try again later'
+    },
+    login: {
+      windowMs: 60 * 60 * 1000, // window
+      delayAfter: 5, // begin slowing down responses after
+      delayMs: 6 * 1000, // slow down subsequent responses
+      max: 10, // start blocking after
+      message: 'Too many login attempts from this IP, please try again later'
+    },
+    resetPassword: {
+      windowMs: 60 * 60 * 1000, // window
+      delayAfter: 5, // begin slowing down responses after
+      delayMs: 6 * 1000, // slow down subsequent responses
+      max: 10, // start blocking after
+      message: 'Too many login attempts from this IP, please try again later'
+    }
   }
 }
