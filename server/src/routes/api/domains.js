@@ -1,7 +1,6 @@
 const pick = require('lodash/pick')
-const changeCase = require('change-case-object')
 
-const prepareDomain = domain => changeCase.camelCase(pick(domain, ['id', 'domain', 'limit', 'system']))
+const prepareDomain = domain => pick(domain, ['id', 'domain', 'limit', 'system'])
 const sendDomain = (res, domain) =>
   res.status(200).send({
     domain: prepareDomain(domain)
