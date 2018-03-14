@@ -21,6 +21,7 @@ module.exports = {
     idleTimeoutMillis: 1000, // close idle clients after 1 second
     connectionTimeoutMillis: 1000 // return an error after 1 second if connection could not be established
   },
+  supportEmailAddress: 'contact@lumenbox.org',
   mail: {
     host: process.env.MAIL_HOST || '',
     port: process.env.MAIL_PORT || 465,

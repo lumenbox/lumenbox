@@ -1,3 +1,5 @@
+const config = require('../config')
+
 module.exports = (user, message) => `Hi ${user.firstName},
 
 ${message}
@@ -6,5 +8,5 @@ Best Regards,
 
 LumenBox Team
 --
-support@lumenbox.org
+${config.supportEmailAddress}
 https://lumenbox.org`
