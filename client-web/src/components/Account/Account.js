@@ -140,7 +140,7 @@ export default connect(
     accountId: state`accounts.selectedAccountId`,
     accountForm: form(state`accounts.accountForm`),
     domains: state`domains.data`,
-    domainList: domains,
+    domainList: domains(),
     showConformDelete: state`accounts.showConformDelete`,
     fieldChanged: signal`accounts.fieldChanged`,
     accountFormSubmitted: signal`accounts.accountFormSubmitted`,
