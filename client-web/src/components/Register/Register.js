@@ -50,6 +50,7 @@ const Register = ({ isLoading, registerForm, fieldChanged, registerFormSubmitted
         type="password"
         id="repeatPassword"
         {...registerForm.repeatPassword}
+        errorMessage={'passwords do not match'}
         onChange={value => fieldChanged({ name: 'registerForm.repeatPassword', value })}
       />
       <Checkbox

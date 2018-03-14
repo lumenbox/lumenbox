@@ -16,20 +16,21 @@ const PasswordReset = ({ isLoading, passwordResetForm, fieldChanged, passwordRes
         }
       }>
       <h1 className="title">Reset Password</h1>
-      <Input label="Email" type="email" icon="envelope" {...form.email} />
+      <Input label="Email" type="email" icon="envelope" {...passwordResetForm.email} />
       <Input
         label="New Password"
         type="password"
         icon="key"
-        {...passwordResetForm.password}
+        {...passwordResetForm.newPassword}
         errorMessage={'must be at least 8 characters long, password phrases are recomended'}
-        onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordResetForm.password', value })}
+        onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordResetForm.newPassword', value })}
       />
       <Input
         label="Repeat Password"
         type="password"
         icon="key"
         {...passwordResetForm.repeatPassword}
+        errorMessage={'passwords do not match'}
         onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordResetForm.repeatPassword', value })}
       />
       <div className="field is-grouped is-grouped-right">

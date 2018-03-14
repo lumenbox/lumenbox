@@ -37,6 +37,7 @@ const ChangePassword = ({ isLoading, changePasswordForm, fieldChanged, changePas
         type="password"
         icon="key"
         {...changePasswordForm.repeatNewPassword}
+        errorMessage={'passwords do not match'}
         onChange={
           /* istanbul ignore next */ value => fieldChanged({ name: 'changePasswordForm.repeatNewPassword', value })
         }
