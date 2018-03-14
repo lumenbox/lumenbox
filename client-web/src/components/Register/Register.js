@@ -42,6 +42,7 @@ const Register = ({ isLoading, registerForm, fieldChanged, registerFormSubmitted
         type="password"
         id="password"
         {...registerForm.password}
+        errorMessage={'must be at least 8 characters long, password phrases are recomended'}
         onChange={value => fieldChanged({ name: 'registerForm.password', value })}
       />
       <Input

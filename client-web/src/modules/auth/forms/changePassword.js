@@ -5,7 +5,8 @@ export default {
   },
   newPassword: {
     value: '',
-    isRequired: true
+    isRequired: true,
+    validationRules: ['minLength:8']
   },
   repeatNewPassword: {
     value: '',

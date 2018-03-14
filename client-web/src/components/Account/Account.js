@@ -72,9 +72,7 @@ const Account = ({
         type="text"
         placeholder="enter your account name"
         {...accountForm.name}
-        errorMessage={
-          !accountForm.name.isValid && 'can only contain a-z0-9.@- and must be between 4 and 32 characters long'
-        }
+        errorMessage={'can only contain a-z0-9.@- and must be between 4 and 32 characters long'}
         onChange={value => fieldChanged({ name: 'accountForm.name', value })}
       />
       <Select
@@ -89,7 +87,7 @@ const Account = ({
         type="text"
         placeholder="your lumen public key"
         {...accountForm.account}
-        errorMessage={!accountForm.account.isValid && 'must be a valid public key'}
+        errorMessage={'must be a valid public key'}
         onChange={value => fieldChanged({ name: 'accountForm.account', value })}
       />
       <Select

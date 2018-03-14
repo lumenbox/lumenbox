@@ -22,6 +22,7 @@ const PasswordReset = ({ isLoading, passwordResetForm, fieldChanged, passwordRes
         type="password"
         icon="key"
         {...passwordResetForm.password}
+        errorMessage={'must be at least 8 characters long, password phrases are recomended'}
         onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'passwordResetForm.password', value })}
       />
       <Input

@@ -24,10 +24,11 @@ const ChangePassword = ({ isLoading, changePasswordForm, fieldChanged, changePas
         autoComplete="off"
       />
       <Input
-        label="New Passwod"
+        label="New Password"
         type="password"
         icon="key"
         {...changePasswordForm.newPassword}
+        errorMessage={'must be at least 8 characters long, password phrases are recomended'}
         onChange={/* istanbul ignore next */ value => fieldChanged({ name: 'changePasswordForm.newPassword', value })}
         autoComplete="off"
       />
