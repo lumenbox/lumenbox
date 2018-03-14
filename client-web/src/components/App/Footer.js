@@ -24,7 +24,7 @@ const Footer = () => (
             <a href="/page/terms">Terms and Conditions</a>
           </li>
           <li>
-            <a href="/page/privacy">Privacy</a>
+            <a href="https://lumenbox.org/privacy-policy/">Privacy</a>
           </li>
         </Menu>
       </div>
