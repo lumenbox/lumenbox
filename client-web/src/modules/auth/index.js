@@ -30,7 +30,7 @@ export default options =>
     },
     signals: {
       registerRouted,
-      registerCompleteRouted: routed('registerCompleted'),
+      registerCompleteRouted: routed('registerComplete'),
       activateRouted,
       changePasswordRouted: routed('changePassword'),
       passwordResetRequestRouted: routed('passwordResetRequest'),
