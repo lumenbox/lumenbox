@@ -4,7 +4,7 @@ module.exports = (user, { domain, name, account }) => ({
   subject: 'Lumenbox Account Deleted',
   text: wrap(
     user,
-    `The Lumenbox stellar federation account below has been delete.
+    `The Lumenbox stellar federation account below has been deleted.
 
         ${name}*${domain} -> ${account}
   
