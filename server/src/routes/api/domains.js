@@ -20,13 +20,14 @@ module.exports = ({ app, pool, config, authorise }) => {
 
   app.post('/api/verify-domain', authorise, (req, res) => {
     pool.query(
-      `select count(*) as count from "domain" where domain.domain like $1${req.body.domainId ? ' and id <> $3' : ''}`,
+      `select count(*) as count from "domain" where domain.domain like $1${req.body.domainId ? ' and id <> $2' : ''}`,
       req.body.domainId ? [req.body.domain, req.body.domainId] : [req.body.domain],
       (err, result) => {
         if (err) {
           console.error('failed to verify domain', err)
           return res.status(500).send({ error: 'Unxpected Error' })
         }
+        // TODO: check the domain has a stellar.toml
         res.sendStatus(result.rows[0].count > 0 ? 200 : 404)
       }
     )

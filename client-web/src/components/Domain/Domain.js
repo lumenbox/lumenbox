@@ -101,9 +101,9 @@ export default connect(
     showConfirmDelete: state`domains.showConfirmDelete`,
     fieldChanged: signal`domains.fieldChanged`,
     domainFormSubmitted: signal`domains.domainFormSubmitted`,
-    deleteAccountClicked: signal`domains.deleteDomainClicked`,
-    deleteAccountConfirmed: signal`domains.deleteDomainConfirmed`,
-    deleteAccountCanceled: signal`domains.deleteDomainCanceled`
+    deleteDomainClicked: signal`domains.deleteDomainClicked`,
+    deleteDomainConfirmed: signal`domains.deleteDomainConfirmed`,
+    deleteDomainCanceled: signal`domains.deleteDomainCanceled`
   },
   Domain
 )

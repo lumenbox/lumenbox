@@ -11,6 +11,7 @@ export default [
   setField(state`accounts.accountForm.account`, state`accounts.data.${props`accountId`}.account`),
   setField(state`accounts.accountForm.name`, state`accounts.data.${props`accountId`}.name`),
   setField(state`accounts.accountForm.domainId`, state`accounts.data.${props`accountId`}.domainId`),
+  setField(state`accounts.accountForm.signature`, state`accounts.data.${props`accountId`}.signature`),
   setField(state`accounts.accountForm.memo`, state`accounts.data.${props`accountId`}.memo`),
   setField(state`accounts.accountForm.memoType`, state`accounts.data.${props`accountId`}.memoType`),
   setField(state`accounts.accountForm.nameAvailability`, true)

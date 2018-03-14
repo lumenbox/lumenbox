@@ -4,7 +4,7 @@ import formSubmitted from '../../../signals/formSubmitted'
 import { goTo } from '@cerebral/router/operators'
 
 export default [
-  when(state`domain.selectedDomainId`),
+  when(state`domains.selectedDomainId`),
   {
     true: formSubmitted({
       put: string`/api/domain/${state`domains.selectedDomainId`}`,

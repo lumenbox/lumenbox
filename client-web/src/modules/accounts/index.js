@@ -19,7 +19,8 @@ export default options =>
         domainId: { value: null, isRequired: true },
         nameAvailability: { value: false, validationRules: ['isTrue'] },
         memoType: { value: '' },
-        memo: { value: '', validationRules: ['isMemo'] }
+        memo: { value: '', validationRules: ['isMemo'] },
+        signature: { value: '' }
       },
       showConfirmDelete: false,
       data: {}

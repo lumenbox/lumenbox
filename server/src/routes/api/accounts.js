@@ -87,7 +87,7 @@ module.exports = ({ app, pool, config, authorise }) => {
             console.error('failed to add account', err)
             return res.status(500).send({ error: 'Unxpected Error' })
           }
-          sendMail(req.user, accountCreated, { domain: req.domain.domain, ...req.body })
+          sendMail(req.user, accountCreated, { system: req.domain.system, domain: req.domain.domain, ...req.body })
           sendAccount(res, result.rows[0])
         }
       )
@@ -138,7 +138,7 @@ module.exports = ({ app, pool, config, authorise }) => {
             console.error('failed to update account', err)
             return res.status(500).send({ error: 'Unxpected Error' })
           }
-          sendMail(req.user, accountUpdated, { domain: req.domain.domain, ...req.body })
+          sendMail(req.user, accountUpdated, { system: req.domain.system, domain: req.domain.domain, ...req.body })
           res.sendStatus(200)
         }
       )

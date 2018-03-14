@@ -60,6 +60,7 @@ CREATE TABLE "user" (
   created_at timestamp DEFAULT now(),
   updated_at timestamp DEFAULT now(),
   CONSTRAINT user_pkey PRIMARY KEY (id)
+  CONSTRAINT email_unique UNIQUE (email)
 )
 WITH (
   OIDS = FALSE
@@ -74,7 +75,8 @@ CREATE TABLE domain (
   created_at timestamp DEFAULT now(),
   updated_at timestamp DEFAULT now(),
   CONSTRAINT domain_pkey PRIMARY KEY (id),
-  CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES "user" (id) MATCH SIMPLE
+  CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES "user" (id) MATCH SIMPLE,
+  CONSTRAINT domain_unique UNIQUE (domain)
 )
 WITH (
   OIDS = FALSE
