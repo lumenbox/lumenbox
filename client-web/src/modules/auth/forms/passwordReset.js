@@ -4,7 +4,7 @@ export default {
     isRequired: true,
     validationRules: ['isEmail']
   },
-  password: {
+  newPassword: {
     value: '',
     isRequired: true,
     validationRules: ['minLength:8']
@@ -12,6 +12,9 @@ export default {
   repeatPassword: {
     value: '',
     isRequired: true,
-    validationRules: ['equalsField:auth.passwordResetForm.password']
+    validationRules: ['equalsField:auth.passwordResetForm.newPassword']
+  },
+  token: {
+    value: null
   }
 }

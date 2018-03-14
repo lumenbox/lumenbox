@@ -7,5 +7,5 @@ export default formSubmitted({
   form: state`auth.passwordResetForm`,
   isLoading: state`auth.isLoading`,
   successMessage: 'Password has been reset',
-  successChain: [goTo('/login')]
+  successChain: [goTo('/')]
 })

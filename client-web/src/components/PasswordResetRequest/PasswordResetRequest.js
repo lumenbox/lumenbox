@@ -30,7 +30,7 @@ const PasswordResetRequest = ({
       />
       <div className="field is-grouped is-grouped-right">
         <div className="control">
-          <a className="button is-text" href="/login">
+          <a className="button is-text" href="/">
             Cancel
           </a>
         </div>

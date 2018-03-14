@@ -10,7 +10,7 @@ export default Router({
     { path: '/activate/:activationKey', signal: 'auth.activateRouted' },
     { path: '/change-password', signal: 'auth.changePasswordRouted' },
     { path: '/password-reset-request', signal: 'auth.passwordResetRequestRouted' },
-    { path: '/password-reset/:email/:passwordResetCode', signal: 'auth.passwordResetRouted' },
+    { path: '/password-reset/:email/:token', signal: 'auth.passwordResetRouted' },
     { path: '/*', signal: 'app.notFoundRouted' }
   ]
 })
