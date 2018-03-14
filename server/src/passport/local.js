@@ -48,7 +48,7 @@ module.exports = {
           if (!user) {
             return done(null, false)
           }
-          if (!password || verifyHash(password, user.passwordHash)) {
+          if (!password || !verifyHash(password, user.passwordHash)) {
             return done(null, false)
           }
           return done(null, user)
