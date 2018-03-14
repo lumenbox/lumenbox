@@ -1,4 +1,5 @@
 import { Controller, Module } from 'cerebral'
+import { state } from 'cerebral/tags'
 import Devtools from 'cerebral/devtools' // eslint-disable-line import/no-named-as-default
 import Modules from './modules'
 import FormsProvider from '@cerebral/forms'
@@ -13,7 +14,15 @@ export default Controller(
     providers: {
       forms: FormsProvider({
         rules: {
-          isPublicKey: (value, arg, get) => StrKey.isValidEd25519PublicKey(value)
+          isPublicKey: (value, arg, get) => StrKey.isValidEd25519PublicKey(value),
+          isMemo: (memo, arg, get) => {
+            const memoType = get(state`accounts.accountForm.memoType.value`)
+            const setting = config.memoTypes.find(item => item.value === memoType)
+            if (setting && setting.validate) {
+              return setting.validate(memo)
+            }
+            return true
+          }
         },
         errorMessages: {}
       }),
