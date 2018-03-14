@@ -1,8 +1,14 @@
-import { set } from 'cerebral/operators'
+import { set, when } from 'cerebral/operators'
 import { state } from 'cerebral/tags'
+import { redirect as Redirect } from '@cerebral/router/operators'
+import waitUntilInitialised from '../actions/waitUntilInitialised'
 
-export default (page, title) => [
-  set(state`app.page`, page),
-  set(state`app.title`, title || null),
-  set(state`app.showMobileMenu`, false)
+export default (page, { authroised, unauthorised, redirect = '/' } = {}) => [
+  set(state`app.showMobileMenu`, false),
+  waitUntilInitialised,
+  when(state`auth.user`, user => (authroised && user) || (unauthorised && !user) || (!authroised && !unauthorised)),
+  {
+    true: set(state`app.page`, page),
+    false: Redirect(redirect)
+  }
 ]

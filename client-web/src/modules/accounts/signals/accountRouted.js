@@ -2,13 +2,11 @@ import { set } from 'cerebral/operators'
 import { state, props } from 'cerebral/tags'
 import { resetForm, setField } from '@cerebral/forms/operators'
 import routed from '../../../signals/routed'
-import waitUntilInitialised from '../../../actions/waitUntilInitialised'
 
 export default [
   set(state`accounts.selectedAccountId`, props`accountId`),
   resetForm(state`accounts.accountForm`),
-  routed('account'),
-  waitUntilInitialised,
+  routed('account', { authroised: true }),
   setField(state`accounts.accountForm.id`, props`accountId`),
   setField(state`accounts.accountForm.account`, state`accounts.data.${props`accountId`}.account`),
   setField(state`accounts.accountForm.name`, state`accounts.data.${props`accountId`}.name`),

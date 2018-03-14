@@ -13,7 +13,6 @@ import passwordResetForm from './forms/passwordReset'
 import registerForm from './forms/register'
 import registerFormSubmitted from './signals/registerFormSubmitted'
 import changePasswordSubmitted from './signals/changePasswordSubmitted'
-import registerRouted from './signals/registerRouted'
 import activateRouted from './signals/activateRouted'
 
 export default options =>
@@ -29,11 +28,11 @@ export default options =>
       registerForm
     },
     signals: {
-      registerRouted,
-      registerCompleteRouted: routed('registerComplete'),
+      registerRouted: routed('register', { authroised: true }),
+      registerCompleteRouted: routed('registerComplete', { unauthorised: true }),
       activateRouted,
-      changePasswordRouted: routed('changePassword'),
-      passwordResetRequestRouted: routed('passwordResetRequest'),
+      changePasswordRouted: routed('changePassword', { authroised: true }),
+      passwordResetRequestRouted: routed('passwordResetRequest', { unauthorised: true }),
       passwordResetRouted,
       fieldChanged: FieldChanged('auth'),
       loginFormSubmitted,
