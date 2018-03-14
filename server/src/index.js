@@ -4,5 +4,5 @@ const config = require('./config')
 
 // start the server
 http.createServer(App(config)).listen(config.port, () => {
-  console.info('LumenBox listing on port', config.port, 'in', config.env, 'mode')
+  console.info('Lumenbox listing on port', config.port, 'in', config.env, 'mode')
 })

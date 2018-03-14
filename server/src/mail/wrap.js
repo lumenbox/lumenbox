@@ -6,7 +6,7 @@ ${message}
 
 Best Regards,
 
-LumenBox Team
+Lumenbox Team
 --
 ${config.supportEmailAddress}
 https://lumenbox.org`

@@ -1,10 +1,10 @@
 const wrap = require('./wrap')
 
 module.exports = (user, { domain, name, account }) => ({
-  subject: 'LumenBox Account Created',
+  subject: 'Lumenbox Account Created',
   text: wrap(
     user,
-    `A new LumenBox stellar federation account has been created.
+    `A new Lumenbox stellar federation account has been created.
 
         ${name}*${domain} -> ${account}
   

@@ -18,7 +18,7 @@ module.exports = (user, template, options) => {
     transporter.sendMail(
       {
         to,
-        from: `"LumenBox" <${config.supportEmailAddress}>`,
+        from: `"Lumenbox" <${config.supportEmailAddress}>`,
         subject,
         text
       },
