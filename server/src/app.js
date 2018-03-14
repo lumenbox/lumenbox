@@ -8,6 +8,7 @@ const { Pool } = require('pg')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const RateLimit = require('express-rate-limit')
 const passport = require('passport')
 const PgSession = require('connect-pg-simple')(session)
 const authorise = require('./passport/authorise')
@@ -30,6 +31,15 @@ module.exports = config => {
       index: false
     })
   )
+
+  // rate limit api calls
+  app.enable('trust proxy')
+  var apiLimiter = new RateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100,
+    delayMs: 0 // disabled
+  })
+  app.use('/api/', apiLimiter)
 
   // setup cookie and body parsing
   app.use(cookieParser())
