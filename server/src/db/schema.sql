@@ -57,6 +57,8 @@ CREATE TABLE "user" (
   google_token text,
   google_email text,
   google_name text,
+  created_at timestamp DEFAULT now(),
+  updated_at timestamp DEFAULT now(),
   CONSTRAINT user_pkey PRIMARY KEY (id)
 )
 WITH (
@@ -69,6 +71,8 @@ CREATE TABLE domain (
   "limit" integer NOT NULL DEFAULT 5,
   user_id integer NOT NULL,
   system boolean NOT NULL DEFAULT false,
+  created_at timestamp DEFAULT now(),
+  updated_at timestamp DEFAULT now(),
   CONSTRAINT domain_pkey PRIMARY KEY (id),
   CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES "user" (id) MATCH SIMPLE
 )
@@ -85,6 +89,8 @@ CREATE TABLE account (
   memo_type text NOT NULL DEFAULT '',
   signature text NOT NULL DEFAULT '',
   user_id integer NOT NULL,
+  created_at timestamp DEFAULT now(),
+  updated_at timestamp DEFAULT now(),
   CONSTRAINT account_pkey PRIMARY KEY (id),
   CONSTRAINT domain_fkey FOREIGN KEY (domain_id) REFERENCES domain (id) MATCH SIMPLE,
   CONSTRAINT user_fkey FOREIGN KEY (user_id) REFERENCES "user" (id) MATCH SIMPLE,

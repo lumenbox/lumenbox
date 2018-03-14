@@ -130,7 +130,7 @@ module.exports = ({ app, pool, config, authorise }) => {
         : [...values(req.body, 'id', 'account', 'name', 'domainId', 'memoType', 'signature'), memo, req.user.id]
       pool.query(
         'update "account" ' +
-          'set "account" = $2, name = $3, domain_id = $4, memo_type = $5, signature = $6, memo = $7 ' +
+          'set "account" = $2, name = $3, domain_id = $4, memo_type = $5, signature = $6, memo = $7, updated_at = now() ' +
           'where user_id = $8 and id = $1',
         params,
         (err, result) => {

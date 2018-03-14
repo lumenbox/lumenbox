@@ -8,7 +8,7 @@ module.exports = ({ app, pool, config, authorise }) => {
       return res.sendStatus(401)
     }
     pool.query(
-      'update "user" set password_hash = $2 where id = $1',
+      'update "user" set password_hash = $2, updated_at = now() where id = $1',
       [req.user.id, generateHash(req.body.newPassword)],
       (err, result) => {
         if (err) {

@@ -58,13 +58,17 @@ module.exports = {
             verifyHash(password, user.passwordHash)
           ) {
             // activate first time users
-            pool.query('update "user" set activation_key = NULL where id = $1', [user.id], (err, res) => {
-              if (err) {
-                return done(err)
+            pool.query(
+              'update "user" set activation_key = NULL, updated_at = now() where id = $1',
+              [user.id],
+              (err, res) => {
+                if (err) {
+                  return done(err)
+                }
+                // auth passed
+                done(null, user)
               }
-              // auth passed
-              done(null, user)
-            })
+            )
           } else if (!user || user.activationKey || !verifyHash(password, user.passwordHash)) {
             // auth failed
             done(null, false)

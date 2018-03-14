@@ -64,7 +64,7 @@ module.exports = ({ app, pool, config, authorise }) => {
     })
     .put(authorise, (req, res) => {
       pool.query(
-        'update "domain" set domain = $1 where user_id = $2 and id = $3',
+        'update "domain" set domain = $1, updated_at = now() where user_id = $2 and id = $3',
         [req.body.domain, req.user.id, req.params.id],
         (err, result) => {
           if (err) {
