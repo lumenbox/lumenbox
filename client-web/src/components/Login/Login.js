@@ -15,7 +15,7 @@ const Login = ({ isLoading, loginForm, fieldChanged, loginFormSubmitted }) => (
           loginFormSubmitted()
         }
       }>
-      <h1 className="title">Login</h1>
+      <h1 className="title">{loginForm.activationKey.value ? 'Activate Your User' : 'Login'}</h1>
       <Input
         label="Email"
         type="email"
