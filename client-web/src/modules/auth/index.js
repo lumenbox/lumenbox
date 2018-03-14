@@ -13,6 +13,7 @@ import passwordResetForm from './forms/passwordReset'
 import registerForm from './forms/register'
 import registerFormSubmitted from './signals/registerFormSubmitted'
 import changePasswordSubmitted from './signals/changePasswordSubmitted'
+import registerRouted from './signals/registerRouted'
 
 export default options =>
   Module({
@@ -27,9 +28,7 @@ export default options =>
       registerForm
     },
     signals: {
-      loginRouted: routed('login'),
-      registerRouted: routed('register'),
-      registerCompleteRouted: routed('registerComplete'),
+      registerRouted,
       changePasswordRouted: routed('changePassword'),
       passwordResetRequestRouted: routed('passwordResetRequest'),
       passwordResetRouted,

@@ -14,7 +14,7 @@ module.exports = ({ app, passport }) => {
         if (err) {
           return next(err)
         }
-        sendMail(user, welcome)
+        sendMail(req.body, welcome)
         return res.sendStatus(201)
       })
     })(req, res, next)
