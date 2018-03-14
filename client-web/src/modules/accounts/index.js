@@ -21,7 +21,7 @@ export default options =>
         memoType: { value: '' },
         memo: { value: '', validationRules: ['isMemo'] }
       },
-      showConformDelete: false,
+      showConfirmDelete: false,
       data: {}
     },
     signals: {

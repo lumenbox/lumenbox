@@ -59,7 +59,7 @@ module.exports = ({ app, pool, config, authorise }) => {
 
   app.post('/api/verify-account', authorise, verifyDomain, (req, res) => {
     pool.query(
-      `select count(*) as count from "account" where name = $1 and domain_id = $2${
+      `select count(*) as count from "account" where name like $1 and domain_id = $2${
         req.body.accountId ? ' and id <> $3' : ''
       }`,
       req.body.accountId ? [req.body.name, req.body.domainId, req.body.accountId] : [req.body.name, req.body.domainId],

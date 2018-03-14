@@ -47,7 +47,7 @@ const Domains = ({ user = { limit: 0 }, domains }) => (
       <div className="control">
         <Button
           className="is-link"
-          href="/domains/new"
+          href="/domain/new"
           disabled={domains.length >= user.limit}
           icon="plus"
           title={

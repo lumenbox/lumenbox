@@ -9,6 +9,7 @@ const Input = ({
   placeholder,
   type = 'text',
   icon,
+  isLoading,
   value,
   isPristine = true,
   isValid = true,
@@ -18,7 +19,7 @@ const Input = ({
   minLength,
   autoComplete = 'on'
 }) => (
-  <Field {...{ id, label, icon, isPristine, isValid, hideValidationIcon, errorMessage }}>
+  <Field {...{ id, label, icon, isPristine, isValid, hideValidationIcon, errorMessage, isLoading }}>
     <input
       className={classNames('input', { 'is-danger': !isPristine && !isValid })}
       type={type}
@@ -31,10 +32,12 @@ const Input = ({
       autoComplete={autoComplete}
     />
     {icon && <Icon className="is-small is-left" name={icon} />}
-    {!hideValidationIcon &&
+    {!isLoading &&
+      !hideValidationIcon &&
       !isPristine &&
       isValid && <Icon className="is-small is-right has-text-success" name="check" />}
-    {!hideValidationIcon &&
+    {!isLoading &&
+      !hideValidationIcon &&
       !isPristine &&
       !isValid && <Icon className="is-small is-right has-text-danger" name="times" />}
   </Field>

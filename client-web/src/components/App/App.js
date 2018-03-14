@@ -12,6 +12,7 @@ import Notifications from '../Notifications'
 
 import dashboard from '../Dashboard'
 import account from '../Account'
+import domain from '../Domain'
 import register from '../Register'
 import registerComplete from '../RegisterComplete'
 import login from '../Login'
@@ -22,6 +23,7 @@ import passwordReset from '../PasswordReset'
 let components = {
   dashboard,
   account,
+  domain,
   register,
   registerComplete,
   changePassword,

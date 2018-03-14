@@ -1,7 +1,17 @@
 import * as React from 'react'
 import * as classNames from 'classnames'
 
-const Field = ({ id, label, icon, isPristine = true, isValid, hideValidationIcon = false, errorMessage, children }) => (
+const Field = ({
+  id,
+  label,
+  icon,
+  isLoading,
+  isPristine = true,
+  isValid,
+  hideValidationIcon = false,
+  errorMessage,
+  children
+}) => (
   <div className="field is-horizontal">
     {label && (
       <div className="field-label is-normal">
@@ -12,8 +22,9 @@ const Field = ({ id, label, icon, isPristine = true, isValid, hideValidationIcon
       <div className="field">
         <div
           className={classNames('control', {
-            'has-icons-left': icon,
-            'has-icons-right': !isPristine && !hideValidationIcon
+            'is-loading': isLoading,
+            'has-icons-left': !isLoading && icon,
+            'has-icons-right': !isLoading && !isPristine && !hideValidationIcon
           })}>
           {children}
         </div>

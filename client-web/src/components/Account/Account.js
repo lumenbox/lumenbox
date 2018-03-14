@@ -19,7 +19,7 @@ const Account = ({
   accountName,
   domains,
   domainList,
-  showConformDelete,
+  showConfirmDelete,
   fieldChanged,
   accountFormSubmitted,
   deleteAccountClicked,
@@ -122,7 +122,7 @@ const Account = ({
       </div>
     </form>
     <Dialog
-      isOpen={showConformDelete}
+      isOpen={showConfirmDelete}
       onClose={() => deleteAccountCanceled()}
       onOk={() => deleteAccountConfirmed()}
       title="Delete Account"
@@ -141,7 +141,7 @@ export default connect(
     accountForm: form(state`accounts.accountForm`),
     domains: state`domains.data`,
     domainList: domains(),
-    showConformDelete: state`accounts.showConformDelete`,
+    showConfirmDelete: state`accounts.showConfirmDelete`,
     fieldChanged: signal`accounts.fieldChanged`,
     accountFormSubmitted: signal`accounts.accountFormSubmitted`,
     deleteAccountClicked: signal`accounts.deleteAccountClicked`,

@@ -5,11 +5,11 @@ import { goTo } from '@cerebral/router/operators'
 import { resetForm } from '@cerebral/forms/operators'
 
 export default [
-  set(state`accounts.showConfirmDelete`, false),
+  set(state`domain.showConfirmDelete`, false),
   formSubmitted({
-    deletePath: string`/api/account/${state`accounts.selectedAccountId`}`,
-    isLoading: state`accounts.isLoading`,
-    successMessage: 'Account deleted',
-    successChain: [resetForm(state`accounts.accountForm`), goTo('/')]
+    deletePath: string`/api/domain/${state`domains.selectedDomainId`}`,
+    isLoading: state`domains.isLoading`,
+    successMessage: 'Domain deleted',
+    successChain: [resetForm(state`domains.domainForm`), goTo('/')]
   })
 ]
