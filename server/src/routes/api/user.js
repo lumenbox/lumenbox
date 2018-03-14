@@ -14,13 +14,8 @@ module.exports = ({ app, passport }) => {
       if (!user) {
         return res.status(401).send(info)
       }
-      req.login(user, err => {
-        if (err) {
-          return next(err)
-        }
-        sendMail(user, welcome)
-        return res.sendStatus(201)
-      })
+      sendMail(user, welcome)
+      return res.sendStatus(201)
     })(req, res, next)
   )
 }
