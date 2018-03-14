@@ -1,7 +1,7 @@
 {
   "name": "lumenbox-server",
   "version": "0.1.0",
-  "description": "LumenBox Server",
+  "description": "Lumenbox Server",
   "private": true,
   "main": "src/index.js",
   "repository": {

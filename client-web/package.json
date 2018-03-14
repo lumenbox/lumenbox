@@ -1,7 +1,7 @@
 {
   "name": "lumenbox-client-web",
   "version": "0.1.0",
-  "description": "LumenBox Web Client",
+  "description": "Lumenbox Web Client",
   "private": true,
   "repository": {
     "type": "git",

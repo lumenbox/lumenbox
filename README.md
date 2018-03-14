@@ -1,4 +1,4 @@
-# LumenBox
+# Lumenbox
 
 ```
 # build the docker image
