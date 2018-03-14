@@ -11,7 +11,10 @@ export default {
       value: 'MEMO_ID',
       label: 'ID',
       description: 'for the recipient to identify whoever is sending the lumens',
-      validate: memo => !isNaN(parseInt(memo, 10))
+      validate(memo) {
+        const value = parseInt(memo, 10)
+        return !isNaN(value) && `${value}` === memo
+      }
     },
     {
       value: 'MEMO_HASH',
