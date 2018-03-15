@@ -23,7 +23,7 @@ export default {
       value: 'MEMO_HASH',
       label: 'Hash',
       description: 'reference to another transaction',
-      validate: memo => memo.trim().length === 32
+      validate: memo => /^[0-9A-Fa-f]{64,64}$/.test(memo)
     }
   ]
 }
