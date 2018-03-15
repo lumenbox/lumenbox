@@ -28,7 +28,7 @@ export default options =>
       registerForm
     },
     signals: {
-      registerRouted: routed('register', { authroised: true }),
+      registerRouted: routed('register', { unauthorised: true }),
       registerCompleteRouted: routed('registerComplete', { unauthorised: true }),
       activateRouted,
       changePasswordRouted: routed('changePassword', { authroised: true }),
