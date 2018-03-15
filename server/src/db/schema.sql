@@ -59,7 +59,7 @@ CREATE TABLE "user" (
   google_name text,
   created_at timestamp DEFAULT now(),
   updated_at timestamp DEFAULT now(),
-  CONSTRAINT user_pkey PRIMARY KEY (id)
+  CONSTRAINT user_pkey PRIMARY KEY (id),
   CONSTRAINT email_unique UNIQUE (email)
 )
 WITH (
