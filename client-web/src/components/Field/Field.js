@@ -13,11 +13,7 @@ const Field = ({
   children
 }) => (
   <div className="field is-horizontal">
-    {label && (
-      <div className="field-label is-normal">
-        <label htmlFor={id}>{label}</label>
-      </div>
-    )}
+    <div className="field-label is-normal">{label && <label htmlFor={id}>{label}</label>}</div>
     <div className="field-body">
       <div className="field">
         <div
