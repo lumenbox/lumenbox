@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import config from '../../config'
 
 const Menu = styled.ul`
   list-style: none !important;
@@ -20,12 +21,16 @@ const Footer = () => (
       <div className="content has-text-centered">
         <Menu>
           <li>&copy; 2018 Lumenbox - All rights reserved</li>
-          <li>
-            <a href="/page/terms">Terms and Conditions</a>
-          </li>
-          <li>
-            <a href="https://lumenbox.org/privacy-policy/">Privacy</a>
-          </li>
+          {config.termsLink && (
+            <li>
+              <a href={config.termsLink}>Terms and Conditions</a>
+            </li>
+          )}
+          {config.privacyLink && (
+            <li>
+              <a href={config.privacyLink}>Privacy Policy</a>
+            </li>
+          )}
         </Menu>
       </div>
     </div>

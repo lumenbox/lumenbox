@@ -1,5 +1,8 @@
 export default {
   baseUrl: '',
+  signingToolLink: 'https://lumenbox.org/signing-tool/',
+  termsLink: 'https://lumenbox.org/terms-and-conditions/',
+  privacyLink: 'https://lumenbox.org/privacy-policy/',
   memoTypes: [
     {
       value: 'MEMO_TEXT',
