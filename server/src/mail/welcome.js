@@ -7,7 +7,7 @@ module.exports = user => ({
     user,
     `Welcome to Lumenbox, the first DKIF secured federation service for Stellar.
 
-Please click on the activation link below to enable your login and begin creating secure Stellar federation records:
+To activate your account and begin creating secure Stellar federation records, please log in to your new account using the following link:
 
         https://app.lumenbox.org/activate/${urlencode(user.email)}/${user.activationKey}`
   )
