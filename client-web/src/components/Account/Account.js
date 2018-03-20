@@ -83,6 +83,15 @@ const Account = ({
         {...accountForm.domainId}
         onChange={value => fieldChanged({ name: 'accountForm.domainId', value })}
       />
+      {accountForm.domainId.value &&
+        !domains[accountForm.domainId.value].system && (
+          <Field>
+            <p className="help">
+              Please see the FAQ for more information about{' '}
+              <a href={config.domainSetupLink}>how configure your domain</a>.
+            </p>
+          </Field>
+        )}
       <Input
         label="Account"
         type="text"
@@ -105,11 +114,8 @@ const Account = ({
         !domains[accountForm.domainId.value].system && (
           <Field>
             <p className="help">
-              Please use the offline{' '}
-              <a href={config.signingToolLink} target="_blank">
-                Signing Tool
-              </a>{' '}
-              to generate the signature.
+              Please see the FAQ for more information about{' '}
+              <a href={config.signingToolLink}>how to create the signature</a>.
             </p>
           </Field>
         )}

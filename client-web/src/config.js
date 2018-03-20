@@ -1,6 +1,7 @@
 export default {
   baseUrl: '',
-  signingToolLink: 'https://lumenbox.org/signing-tool/',
+  signingToolLink: 'https://lumenbox.org/faq/how-can-i-sign-my-federation-records-for-dkif/',
+  domainSetupLink: 'https://lumenbox.org/faq/set-up-domain-for-lumenbox-federation/',
   termsLink: 'https://lumenbox.org/terms-and-conditions/',
   privacyLink: 'https://lumenbox.org/privacy-policy/',
   memoTypes: [
